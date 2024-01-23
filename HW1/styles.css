@@ -1,0 +1,123 @@
+body {
+    background-color:rgb(0, 0, 0)
+}
+
+/* Page 1 */
+
+/* Formatting for Page 1*/
+.titlePage {
+    height: 100vh;
+    min-height: 740px;
+    background-image: url("imgs/spacefire.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Formatting for [Page 1] textbox */
+.titlePage .title {
+    font-size: 22pt;
+    color: #ffffff;
+    padding: 9em;
+    text-align: center;
+    background-color: rgba(120, 120, 120, 0);
+}
+
+/* Formatting for [Page 1] text buttons */
+.titlePage .nav {
+    font-style: bold;
+    font-weight: 300;
+    color: #fff;
+    margin-top: 2em;
+    font-size: 1.5em;
+    display: flex;
+    flex-direction: row;
+}
+
+/* Color of [Page 1] textbox text (before hovering over) */
+.titlePage .nav a {
+    flex-grow: 1;
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* Formatting of [Page 1] text box */
+.titlePage .nav-item {
+    font-size: 0.5em;
+    padding: 0.5em 1em;
+    margin: 0 0.5em;
+    text-align: center;
+    border: 1px solid #ffffff;
+    border-width: 1px 0;
+}
+
+/* Color formatting for when you hover over [Page 1] text boxes */
+.titlePage .nav-item:hover {
+    color: #000000; /* Text color */
+    background-color: rgba(46, 144, 173, 0.5); /* Color of box */
+}
+
+/* Formatting for [Page 1] h1 headers */
+.title h1 {
+    font-size: 2.5em;
+    letter-spacing: 0.2em;
+}
+
+/* Formatting for [Page 1] h2 subheaders */
+.title h2 {
+    font-weight: 300;
+    line-height: 0.5em;
+}
+
+/* Page 2 */
+
+/* Formatting for [Page 2] textbox */
+.aboutMeBackground {
+    margin: 25vh;
+    text-align: center;
+    background-color: rgb(61, 61, 61); /* Color of background */
+    color: #e7d9d9; /* color of text */
+    width: 75%;
+}
+
+/* Controls textbox and word size of [Page 2] aboutMe */
+.aboutMe {
+    min-height: 80vh;
+    font-size: 2em;
+}
+
+/* Page 3 */
+
+/* Formatting for Page 3 */
+.myInterests {
+    box-sizing: border-box;
+    min-height: 100vh;
+    padding: 2em;
+    color: #ffffff; /* color of text */
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+    background-image: url("imgs/nightsky.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Formats alignment of [Page 3] body text with header */
+.myInterests .myInterests-container {
+    display: flex;
+    justify-content: space-around;
+}
+
+/* Defines size of [Page 3] text box*/
+.myInterests .myInterests-group {
+    padding: 1em;
+    min-width: 300px;
+    max-width: 500px;
+}
+
+/* Formats alignment of [Page 3] body text */
+.myInterests .myInterests-item {
+    text-align: left;
+    font-style: normal;
+}
