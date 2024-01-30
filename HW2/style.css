@@ -1,0 +1,47 @@
+body{
+    height: 90vh;
+    background-image: url("img/eye.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: purple;
+}
+
+
+/* Define textbox traits of h1 [container] */
+.container {
+    text-align: center;
+    font-size: 22pt;
+    color: black;
+    margin-top: 5em;
+    font-weight: bold;
+}
+
+h2 {
+    margin-top: 5em;
+}
+
+/* Button traits */
+.button {
+    background-color: #0e067c;
+    border: 5px;
+    border-color:white;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Traits for when you hover over the button */
+.button:hover {
+    background-color:#473dd1;
+    transition:0.5s;
+}
+
+/* Traits for when you click the button */
+.button:active {
+    background-color: #aaa8c9
+}
