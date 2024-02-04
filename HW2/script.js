@@ -1,3 +1,5 @@
+count = 1;
+
 function favWeb(){
     console.log("My favorite websites are youtube.com, instagram.com, and twitter.com.");
 }
@@ -11,5 +13,11 @@ function favArtist(){
 }
 
 function changeBackground(){
-    document.body.style.backgroundSize = "0";
+    if (count == 1){
+        document.body.style.backgroundSize = "0%";
+        count -= 1;
+    } else {
+        document.body.style.backgroundSize = "100%";
+        count += 1;
+    }
 }
