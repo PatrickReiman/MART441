@@ -1,0 +1,47 @@
+body{
+    background-image: url("img/outsidestore.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: purple;
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+.container {
+    font-family: Helvetica;
+    text-align: center;
+    font-size: 22pt;
+    color: rgb(0, 52, 163);
+    margin-top: 12em;
+    font-weight: bold;
+}
+
+h1 {
+    -webkit-text-stroke: 2px white;
+}
+
+h2{
+    -webkit-text-stroke: 1px white;
+}
+
+.button {
+    background-color: #7c064b;
+    border: 5px;
+    border-color:white;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color:#d13dbd;
+    transition:0.5s;
+}
+
+.button:active {
+    background-color: #c9a8c2
+}
