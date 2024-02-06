@@ -24,6 +24,36 @@ h2{
     -webkit-text-stroke: 1px white;
 }
 
+#buttonRestart {
+    visibility: hidden;
+    background-color: #7c064b;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: 275px;
+    margin-top: 1em;
+    border: 5px;
+    border-color:white;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+#buttonRestart:hover {
+    background-color:#d13dbd;
+    transition:0.5s;
+}
+
+#buttonRestart:active {
+    background-color: #c9a8c2
+}
+
 .button {
     background-color: #7c064b;
     border: 5px;

@@ -5,6 +5,7 @@ var select = [cheeseSelect, icecreamSelect, applesSelect]
 var cheeseTypes = ["Feta", "Brie", "Mozzarella"]
 var icecreamTypes = ["Vanilla", "Chocolate", "Mint"]
 var applesTypes = ["Red Delicious", "Ginger Gold", "Gala"]
+var initialTypes = ["Cheese", "Ice Cream", "Apples"]
 
 function buttonChecker(x){
     if (1 > stageProgression){
@@ -35,6 +36,7 @@ function cheeseSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 2){
         document.body.style.backgroundImage = "url('./img/brie.webp')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your brie cheese!";
@@ -42,6 +44,7 @@ function cheeseSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 3) {
         document.body.style.backgroundImage = "url('./img/mozzarella.jpg')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your mozzarella cheese!";
@@ -49,6 +52,7 @@ function cheeseSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else {
         console.log("failure");
     }
@@ -71,6 +75,7 @@ function icecreamSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 2){
         document.body.style.backgroundImage = "url('./img/chocolate.jpg')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your chocolate ice cream!";
@@ -78,6 +83,7 @@ function icecreamSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 3) {
         document.body.style.backgroundImage = "url('./img/mint.jpg')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your mint ice cream!";
@@ -85,6 +91,7 @@ function icecreamSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else {
         console.log("failure");
     }
@@ -107,6 +114,7 @@ function applesSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 2){
         document.body.style.backgroundImage = "url('./img/gingergold.jpg')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your ginger gold apple!";
@@ -114,6 +122,7 @@ function applesSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 3) {
         document.body.style.backgroundImage = "url('./img/gala.webp')";
         document.getElementById("h1").innerHTML = "You walk out of the store with your gala apple!";
@@ -121,7 +130,23 @@ function applesSelect(x){
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
         }
+        document.getElementById("buttonRestart").style.visibility = "visible";
     } else {
         console.log("failure");
+    }
+}
+
+function resetPage(){
+    document.getElementById("buttonRestart").style.visibility = "hidden";
+    whichAisle = 0;
+    stageProgression = 0;
+    document.body.style.backgroundImage = "url('./img/outsidestore.jpg')";
+    for (let i = 0; i < 3; i++){
+        document.getElementsByClassName("button")[i].style.visibility = "visible";
+    }
+    document.getElementById("h1").innerHTML = "You're out of food at home and need to pick up some from the store";
+    document.getElementById("h2").innerHTML = "What do you buy?";
+    for (let i = 0; i < 3; i++){
+        document.getElementById("button"+i).innerHTML = initialTypes[i]
     }
 }
