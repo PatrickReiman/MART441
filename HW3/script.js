@@ -109,7 +109,7 @@ function buyApples(){
 function applesSelect(x){
     if (x == 1){
         document.body.style.backgroundImage = "url('./img/reddelicious.jpg')";
-        document.getElementById("h1").innerHTML = "You walk out of the store with your red delicious apple!";
+        document.getElementById("h1").innerHTML = "You walk out of the store with your red delicious apples!";
         document.getElementById("h2").innerHTML = "";
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
@@ -117,7 +117,7 @@ function applesSelect(x){
         document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 2){
         document.body.style.backgroundImage = "url('./img/gingergold.jpg')";
-        document.getElementById("h1").innerHTML = "You walk out of the store with your ginger gold apple!";
+        document.getElementById("h1").innerHTML = "You walk out of the store with your ginger gold apples!";
         document.getElementById("h2").innerHTML = "";
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
@@ -125,7 +125,7 @@ function applesSelect(x){
         document.getElementById("buttonRestart").style.visibility = "visible";
     } else if (x == 3) {
         document.body.style.backgroundImage = "url('./img/gala.webp')";
-        document.getElementById("h1").innerHTML = "You walk out of the store with your gala apple!";
+        document.getElementById("h1").innerHTML = "You walk out of the store with your gala apples!";
         document.getElementById("h2").innerHTML = "";
         for (let i = 0; i < 3; i++){
             document.getElementsByClassName("button")[i].style.visibility = "hidden";
@@ -137,16 +137,5 @@ function applesSelect(x){
 }
 
 function resetPage(){
-    document.getElementById("buttonRestart").style.visibility = "hidden";
-    whichAisle = 0;
-    stageProgression = 0;
-    document.body.style.backgroundImage = "url('./img/outsidestore.jpg')";
-    for (let i = 0; i < 3; i++){
-        document.getElementsByClassName("button")[i].style.visibility = "visible";
-    }
-    document.getElementById("h1").innerHTML = "You're out of food at home and need to pick up some from the store";
-    document.getElementById("h2").innerHTML = "What do you buy?";
-    for (let i = 0; i < 3; i++){
-        document.getElementById("button"+i).innerHTML = initialTypes[i]
-    }
+    location.reload();
 }
