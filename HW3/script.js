@@ -5,7 +5,6 @@ var select = [cheeseSelect, icecreamSelect, applesSelect]
 var cheeseTypes = ["Feta", "Brie", "Mozzarella"]
 var icecreamTypes = ["Vanilla", "Chocolate", "Mint"]
 var applesTypes = ["Red Delicious", "Ginger Gold", "Gala"]
-var initialTypes = ["Cheese", "Ice Cream", "Apples"]
 
 function buttonChecker(x){
     if (1 > stageProgression){
