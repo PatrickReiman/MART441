@@ -1,0 +1,92 @@
+@font-face {
+    font-family: Nasalization; 
+    src: url('./font/nasalization-rg.otf');
+}
+
+/* Background */
+body {
+    background-image: url("img/prelaunch.webp");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 0);
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+/* Headers and their text */
+.container {
+    font-family: Helvetica;
+    text-align: center;
+    font-size: 22pt;
+    color: rgb(0, 52, 163);
+    margin-top: 12em;
+    font-weight: bolder;
+    font-family: Nasalization;
+}
+
+h1 {
+    -webkit-text-stroke: 0.15px white;
+}
+
+h2{
+    -webkit-text-stroke: 0.05px white;
+}
+
+/* Button */
+.button {
+    color: #D92906;
+    background-color: #ffffff;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Nasalization;
+}
+
+.button:hover {
+    background-color:#D92906;
+    color: rgb(255, 255, 255);
+    /* Removed until I can figure out how to fix
+    transition:0.5s;
+    */
+}
+
+.button:active {
+    color: rgb(255, 255, 255);
+    background-color: #da573d;
+}
+
+/* Restart button */
+#buttonRestart {
+    visibility: hidden;
+    background-color: #ffffff;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: 275px;
+    margin-top: 1em;
+    border: 5px;
+    color: #D92906;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: Nasalization;
+}
+
+#buttonRestart:hover {
+    background-color:#D92906;
+    color: rgb(255, 255, 255);
+    transition:0.5s;
+}
+
+#buttonRestart:active {
+    background-color: #da573d;
+    color: rgb(255, 255, 255);
+}
