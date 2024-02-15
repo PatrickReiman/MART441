@@ -1,5 +1,6 @@
 var failProgression = 0;
 var progression = 0;
+var success = Math.floor(Math.random() * 101);
 
 function buttonChecker(x){
     if(x%5 == 0){
@@ -12,6 +13,7 @@ function buttonChecker(x){
         progression == 2 ? inSpace() :
         progression == 3 ? approachSatellite() :
         progression == 4 ? repair() :
+        progression == 5 ? decoupleSatellite() :
         returnToEarth();
     }
 }
@@ -40,7 +42,7 @@ function launch(){
     document.getElementById("h2").innerHTML = "";
     document.getElementById("button0").innerHTML = "Onward"
     document.getElementById("button1").style.visibility = "hidden";
-    document.getElementById("button0").style.marginLeft = '6.5em';
+    document.getElementById("button0").style.marginLeft = '6em';
 }
 
 function inSpace(){
@@ -83,10 +85,10 @@ function successOrFailure(x){
         document.getElementById("h2").innerHTML = "Now you must make the emergency repairs";
         document.getElementById("button0").innerHTML = "Attempt Repairs"
         document.getElementById("button0").style.visibility = "visible";
-        document.getElementById("button0").style.marginLeft = '6.5em';
+        document.getElementById("button0").style.marginLeft = '10em';
     } else {
         document.body.style.backgroundImage = "url('./img/disasterstrikes.jpg')";
-        document.getElementById("h1").innerHTML = "You misjudge the distance to the satellite and accidently crash into it";
+        document.getElementById("h1").innerHTML = "You misjudge the distance to the satellite and crash into it";
         document.getElementById("h2").innerHTML = "The space shuttle breaks up and falls back down to Earth";
         var audio = new Audio('./audio/taps.mp3');
         audio.play();
@@ -95,5 +97,41 @@ function successOrFailure(x){
 }
 
 function repair(){
+    console.log(success);
+    if(success >= 0 && success <= 90){
+        document.getElementById("h1").style.color = "#00a500";
+        document.getElementById("h1").innerHTML = "The repairs were successfully made!";
+        document.getElementById("h2").innerHTML = "Now you must decouple the satellite from the space shuttle";
+        document.getElementById("button0").innerHTML = "Decouple Satellite"
+    } else {
+        document.getElementById("h1").style.color = "#721300";
+        document.getElementById("h1").innerHTML = "The repairs were unsuccessfully made.";
+        document.getElementById("h2").innerHTML = "Now you must decouple the satellite from the space shuttle";
+        document.getElementById("button0").innerHTML = "Decouple Satellite"
+    }
+}
 
+function decoupleSatellite(){
+    document.body.style.backgroundImage = "url('./img/releasesat.jpg')";
+    document.body.style.backgroundPosition = "50% 50%";
+    document.getElementById("h1").style.color = "#0034a3";
+    document.getElementById("h1").innerHTML = "The satellite successfully decouples from the space shuttle";
+    document.getElementById("h2").innerHTML = "Mission Control authorizes you to return to Earth";
+    document.getElementById("button0").innerHTML = "Return to Earth"
+}
+
+function returnToEarth(){
+    document.body.style.backgroundImage = "url('./img/shuttleland.png')";
+    document.getElementById("button0").style.visibility = "hidden";
+    var audio = new Audio('./audio/cheering.mp3');
+    audio.play();
+    if(success >= 0 && success <= 90){
+        document.getElementById("h1").innerHTML = "The shuttle safely lands on the runway.";
+        document.getElementById("h2").innerHTML = "NASA congratulates you on successfully repairing the satellite";
+    restartFormatting();
+    } else {
+        document.getElementById("h1").innerHTML = "The shuttle safely lands on the runway.";
+        document.getElementById("h2").innerHTML = "NASA thanks you for attempting to repair the satellite";
+        restartFormatting();
+    }
 }
