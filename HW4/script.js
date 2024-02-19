@@ -79,7 +79,7 @@ function approachSatellite(){
 }
 
 function successOrFailure(x){
-    if(x >= 1 && x <= 250){
+    if(x >= 25 && x <= 250){
         document.body.style.backgroundImage = "url('./img/successfuldocking.jpg')";
         document.getElementById("h1").innerHTML = "You successfully couple the satellite to the space shuttle.";
         document.getElementById("h2").innerHTML = "Now you must make the emergency repairs";
@@ -98,7 +98,7 @@ function successOrFailure(x){
 
 function repair(){
     console.log(success);
-    if(success >= 0 && success <= 90){
+    if(success >= 0 && success <= 80){
         document.getElementById("h1").style.color = "#00a500";
         document.getElementById("h1").innerHTML = "The repairs were successfully made!";
         document.getElementById("h2").innerHTML = "Now you must decouple the satellite from the space shuttle";
