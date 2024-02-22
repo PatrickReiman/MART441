@@ -17,17 +17,18 @@ body {
     font-weight: bolder;
 }
 
+/* This makes the grid, not sure exactly how it works but fr is spacingand div > div is how you center it for some reason */
+
 .grid {
-    margin-left: auto;
-    margin-right: auto;
     display: grid;
     gap: 1px;
-    grid-template-columns: repeat(3, 0.1fr);
+    grid-template-columns: repeat(4, 0.1fr);
 }
 
 div > div {
-    margin-left: auto;
-    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
 }
 
@@ -35,8 +36,7 @@ div > div {
 .button {
     width: 300px;
     height: 300px;
-    color: #D92906;
-    background-color: #ffffff;
+    background-color: #b06dee;
     padding: 15px 32px;
     text-align: center;
     display: block;
@@ -46,14 +46,14 @@ div > div {
 }
 
 .button:hover {
-    background-color:#D92906;
+    background-color:#8e39df;
     color: rgb(255, 255, 255);
     transition:0.5s;
 }
 
 .button:active {
     color: rgb(255, 255, 255);
-    background-color: #da573d;
+    background-color: #b06dee;
 }
 
 /* Restart button */
