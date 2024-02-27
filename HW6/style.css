@@ -1,0 +1,94 @@
+/* Background */
+body {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgb(0, 0, 0);
+    background-attachment: fixed;
+    background-size: 100%;
+}
+
+/* Headers and their text */
+.container {
+    font-family: Helvetica;
+    text-align: center;
+    font-size: 22pt;
+    color: #ffffff;
+    margin-top: 2em;
+    font-weight: bolder;
+}
+
+/* This makes the grid, not sure exactly how it works but fr is spacingand div > div is how you center it for some reason */
+
+.grid {
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(4, 0.1fr);
+}
+
+div > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Button */
+.button {
+    width: 300px;
+    height: 300px;
+    background-color: #b06dee;
+    padding: 15px 32px;
+    text-align: center;
+    display: block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.button:hover {
+    background-color:#8e39df;
+    color: rgb(255, 255, 255);
+    transition:0.5s;
+}
+
+.button:active {
+    color: rgb(255, 255, 255);
+    background-color: #b06dee;
+}
+
+/* Restart button */
+#buttonRestart {
+    height: 100px;
+    position: absolute;
+    visibility: hidden;
+    background-color: #ffffff;
+    position: absolute; 
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    width: 275px;
+    border: 5px;
+    color: #D92906;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+    top: 300px;
+    left: 0;
+}
+
+#buttonRestart:hover {
+    background-color:#D92906;
+    color: rgb(255, 255, 255);
+    transition:0.5s;
+}
+
+#buttonRestart:active {
+    background-color: #da573d;
+    color: rgb(255, 255, 255);
+    color:#721300;
+    color: #00a500
+}
