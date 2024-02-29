@@ -18,7 +18,6 @@ body {
 }
 
 /* This makes the grid, not sure exactly how it works but fr is spacingand div > div is how you center it for some reason */
-
 .grid {
     display: grid;
     gap: 1px;
@@ -91,4 +90,48 @@ div > div {
     color: rgb(255, 255, 255);
     color:#721300;
     color: #00a500
+}
+
+/* Form formating */
+.form {
+    width: 100px;
+    align-items: center;
+    justify-content: center;
+}
+
+.labelText {
+    border-radius: 10px;
+    font-size: 20px;
+    display: inline-block;
+    background-color: #ffffff;
+    color: #000000;
+    border-color: #000000;
+}
+
+input { 
+    text-align: center; 
+}
+
+/* Submit Button */
+
+.submitButton {
+    color: #0696d9;
+    background-color: #ffffff;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 27px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.submitButton:hover {
+    background-color:#0696d9;
+    color: rgb(255, 255, 255);
+    transition: 0.5s;
+}
+
+.submitButton:active {
+    background-color: #1f48b8;
+    color: #ffffff
 }

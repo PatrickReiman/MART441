@@ -1,28 +1,20 @@
 <!DOCTYPE html>
 
 <head>
-    <title>I love matching</title>
+    <title>Give me your credit card</title>
     <link rel="stylesheet" href="./style.css">
     <script type="text/javascript" src="./script.js"></script>
 </head>
 
 <body onload="randomSort();">
     <div class = "container">
-        <h1 id = "h1">Match the images.</h1>
-            <div class="grid">
-                <div><button id = "button1" class = "button" onclick = "buttonChecker(1);"></button></div>
-                <div><button id = "button2" class = "button" onclick = "buttonChecker(2);"></button></div>
-                <div><button id = "button3" class = "button" onclick = "buttonChecker(3);"></button></div>
-                <div><button id = "button4" class = "button" onclick = "buttonChecker(4);"></button></div>
-                <div><button id = "button5" class = "button" onclick = "buttonChecker(5);"></button></div>
-                <div><button id = "button6" class = "button" onclick = "buttonChecker(6);"></button></div>
-                <div><button id = "button7" class = "button" onclick = "buttonChecker(7);"></button></div>
-                <div><button id = "button8" class = "button" onclick = "buttonChecker(8);"></button></div>
-                <div><button id = "button9" class = "button" onclick = "buttonChecker(9);"></button></div>
-                <div><button id = "button10" class = "button" onclick = "buttonChecker(10);"></button></div>
-                <div><button id = "button11" class = "button" onclick = "buttonChecker(11);"></button></div>
-                <div><button id = "button12" class = "button" onclick = "buttonChecker(12);"></button></div>
-          </div>
+        <h1 id = "h1">First time or return customer?</h1>
+            <label for = "firstName">First name:</label><br>
+                <input type = "text" id = "firstName" class = "labelText" name = "firstName" value=""><br><br>
+            <label for = "lastName">Last name:</label><br>
+                <input type = "text" id = "lastName" class = "labelText" name = "lastName" value=""><br><br>
+            <label for = "Age">Age:</label><br>
+                <input type = "number" id = "age" min = "0" class = "labelText" name = "age" value=""><br><br>
+        <button id = "submitButton" class = "submitButton" onclick = "fxn();">Submit</button>
     </div>
-    <button id = "buttonRestart" class = "button" onclick = "resetPage();">Restart</button>
 </body>
