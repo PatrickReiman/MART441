@@ -4,13 +4,14 @@ const correctArray = [];
 var reactivateButton = 0;
 var viewableImages = 0;
 var winCondition = 0;
-
+var matchNumber = 0;
 
 function buttonChecker(x){
     tempArray.splice(viewableImages, 1, "i"+Math.round([numberArray[x-1]]/2)+".jpg");
     viewableImages++;
     document.getElementById("button"+x).disabled = true;
     if (viewableImages == 2){
+        matchNumber++
         document.getElementById("button"+x).style.background = "url('../img/i"+Math.round([numberArray[x-1]]/2)+".jpg')";
         if(tempArray[0] == tempArray[1]){
             var audio = new Audio('../audio/correct.mp3');
@@ -25,10 +26,11 @@ function buttonChecker(x){
             if(winCondition == 6){
                 var audio = new Audio('../audio/win.mp3');
                 audio.play();
+                localStorage.setItem('matchNumber', matchNumber)
                 setTimeout(function(){
                     window.location.href = "../pages/end.html";
                     return false;
-                }, 1000);
+                }, 2000);
             }
             reactivateButton = x;
         } else {
@@ -53,8 +55,6 @@ function disableButtons(x) {
         reactivateButton = x;
         for (var i = 1; i < 13; i ++) {
             if (correctArray.includes(i)){
-                console.log("correct element detected");
-                console.log(correctArray);
             } else {
                 document.getElementById("button"+i).disabled = false;
             }

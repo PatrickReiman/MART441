@@ -17,6 +17,13 @@ body {
     font-weight: bolder;
 }
 
+h2 {
+    font-family: Helvetica;
+    text-align: center;
+    font-size: 22pt;
+    color: #ffffff;
+}
+
 /* This makes the grid, not sure exactly how it works but fr is spacingand div > div is how you center it for some reason */
 .grid {
     display: grid;
@@ -57,25 +64,18 @@ div > div {
 
 /* Restart button */
 #buttonRestart {
-    height: 100px;
-    position: absolute;
-    background-color: #ffffff;
-    position: absolute; 
-    left: 0; 
-    right: 0; 
+    width: 170px;
+    height: 70px;
     margin-left: auto; 
     margin-right: auto;
-    width: 275px;
-    border: 5px;
     color: #D92906;
+    background-color: #ffffff;
     padding: 15px 32px;
     text-align: center;
-    display: inline-block;
+    display: block;
     font-size: 27px;
     cursor: pointer;
     border-radius: 5px;
-    top: 300px;
-    left: 0;
 }
 
 #buttonRestart:hover {
@@ -87,8 +87,6 @@ div > div {
 #buttonRestart:active {
     background-color: #da573d;
     color: rgb(255, 255, 255);
-    color:#721300;
-    color: #00a500
 }
 
 /* Form formating */

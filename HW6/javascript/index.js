@@ -2,14 +2,18 @@ var jsonObject = {};
 var userOrder = 0;
 
 function submitInfo(){
-    jsonObject[userOrder] = {};
+    jsonObject["user"+userOrder] = {};
     const firstNameInput = document.getElementById("firstNameInput");
-    jsonObject[userOrder].firstName = firstNameInput.value;
+    jsonObject["user"+userOrder].firstName = firstNameInput.value;
     const lastNameInput = document.getElementById("lastNameInput");
-    jsonObject[userOrder].lastName = lastNameInput.value;
+    jsonObject["user"+userOrder].lastName = lastNameInput.value;
     const ageInput = document.getElementById("ageInput");
-    jsonObject[userOrder].age = ageInput.value;
-    console.log("working");
-    window.location.href = "./pages/match.html";
-    return false;
+    jsonObject["user"+userOrder].age = ageInput.value;
+
+    if (ageInput.value != "" && lastNameInput.value != "" && firstNameInput.value != ""){
+        localStorage.setItem("jsonObject", JSON.stringify(jsonObject));
+        window.location.href = "./pages/match.html";
+        userOrder++;
+        return false;
+    }
 }
