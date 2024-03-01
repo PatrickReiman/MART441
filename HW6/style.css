@@ -59,7 +59,6 @@ div > div {
 #buttonRestart {
     height: 100px;
     position: absolute;
-    visibility: hidden;
     background-color: #ffffff;
     position: absolute; 
     left: 0; 

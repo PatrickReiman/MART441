@@ -1,5 +1,4 @@
 function fxn(){
-    const txt1 = document.getElementById("tbuser");
-    console.log(txt1.value);
+    window.location.href = "./index.html";
+    return false;
 }
-

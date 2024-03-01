@@ -3,10 +3,10 @@
 <head>
     <title>I love matching</title>
     <link rel="stylesheet" href="../style.css">
-    <script type="text/javascript" src="../script.js"></script>
+    <script type="text/javascript" src="../javascript/match.js"></script>
 </head>
 
-<body>
+<body onload="randomSort();">
     <div class = "container">
         <h1 id = "h1">Match the images.</h1>
             <div class = "grid">
@@ -24,5 +24,4 @@
                 <div><button id = "button12" class = "button" onclick = "buttonChecker(12);"></button></div>
             </div>
     </div>
-    <button id = "buttonRestart" class = "button" onclick = "resetPage();">Restart</button>
 </body>

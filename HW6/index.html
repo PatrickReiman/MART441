@@ -3,18 +3,20 @@
 <head>
     <title>Give me your credit card</title>
     <link rel="stylesheet" href="./style.css">
-    <script type="text/javascript" src="./script.js"></script>
+    <script type="text/javascript" src="./javascript/index.js"></script>
 </head>
 
-<body onload="randomSort();">
+<body>
     <div class = "container">
         <h1 id = "h1">First time or return customer?</h1>
-            <label for = "firstName">First name:</label><br>
-                <input type = "text" id = "firstName" class = "labelText" name = "firstName" value=""><br><br>
-            <label for = "lastName">Last name:</label><br>
-                <input type = "text" id = "lastName" class = "labelText" name = "lastName" value=""><br><br>
-            <label for = "Age">Age:</label><br>
-                <input type = "number" id = "age" min = "0" class = "labelText" name = "age" value=""><br><br>
-        <button id = "submitButton" class = "submitButton" onclick = "fxn();">Submit</button>
+        <form>
+            <label>First name:</label><br>
+                <input type = "text" id = "firstNameInput" class = "labelText" name = "firstNameInput" value="" required><br><br>
+            <label>Last name:</label><br>
+                <input type = "text" id = "lastNameInput" class = "labelText" name = "lastNameInput" value="" required><br><br>
+            <label>Age:</label><br>
+                <input type = "number" id = "ageInput" min = "0" class = "labelText" name = "ageInput" value="" required><br><br>
+            <button id = "submitButton" class = "submitButton" onclick = "return submitInfo();" type = "submit" required>Submit</button>
+        </form>
     </div>
 </body>
