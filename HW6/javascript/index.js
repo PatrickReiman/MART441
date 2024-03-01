@@ -16,4 +16,6 @@ function submitInfo(){
         userOrder++;
         return false;
     }
+
+    //optimize with preventDefault()? how?
 }
