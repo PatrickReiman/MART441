@@ -3,20 +3,16 @@
 <head>
     <title>Give me your credit card</title>
     <link rel="stylesheet" href="./style.css">
-    <script type="text/javascript" src="./javascript/index.js"></script>
+    <script type="text/javascript" src="./index.js"></script>
 </head>
 
-<body>
+<body onload = randomSort();>
     <div class = "container">
-        <h1 id = "h1">First time or return customer?</h1>
-        <form id = "form">
-            <label>First name:</label><br>
-                <input type = "text" id = "firstNameInput" class = "labelText" name = "firstNameInput" value="" required><br><br>
-            <label>Last name:</label><br>
-                <input type = "text" id = "lastNameInput" class = "labelText" name = "lastNameInput" value="" required><br><br>
-            <label>Age:</label><br>
-                <input type = "number" id = "ageInput" min = "0" class = "labelText" name = "ageInput" value="" required><br><br>
-            <button id = "submitButton" class = "submitButton" onclick = "return submitInfo();" type = "submit" required>Submit</button>
-        </form>
+        <h1 id = "title">Click the button</h1>
+        <img id = "image" width = "700" height = "500" src = "./image/APC.jpg">
+        <h2 id = "description"></h2>
+        <h2 id = "author"></h2>
+        <h2 id = "imageYear"></h2>
+            <button id = "button0" class = "button" onclick = "buttonChecker();">You can trust me</button>
     </div>
 </body>

@@ -17,55 +17,8 @@ body {
     font-weight: bolder;
 }
 
-h2 {
-    font-family: Helvetica;
-    text-align: center;
-    font-size: 22pt;
-    color: #ffffff;
-}
-
-/* This makes the grid, not sure exactly how it works but fr is spacingand div > div is how you center it for some reason */
-.grid {
-    display: grid;
-    gap: 1px;
-    grid-template-columns: repeat(4, 0.1fr);
-}
-
-div > div {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-}
-
 /* Button */
 .button {
-    width: 300px;
-    height: 300px;
-    background-color: #b06dee;
-    padding: 15px 32px;
-    text-align: center;
-    display: block;
-    font-size: 27px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.button:hover {
-    background-color:#8e39df;
-    color: rgb(255, 255, 255);
-    transition:0.5s;
-}
-
-.button:active {
-    color: rgb(255, 255, 255);
-    background-color: #b06dee;
-}
-
-/* Restart button */
-#buttonRestart {
-    width: 170px;
-    height: 70px;
     margin-left: auto; 
     margin-right: auto;
     color: #D92906;
@@ -78,57 +31,17 @@ div > div {
     border-radius: 5px;
 }
 
-#buttonRestart:hover {
+.button:hover {
     background-color:#D92906;
     color: rgb(255, 255, 255);
     transition:0.5s;
 }
 
-#buttonRestart:active {
+.button:active {
+    color: rgb(255, 255, 255);
     background-color: #da573d;
-    color: rgb(255, 255, 255);
 }
 
-/* Form formating */
-.form {
-    width: 100px;
-    align-items: center;
-    justify-content: center;
-}
-
-.labelText {
-    border-radius: 10px;
-    font-size: 20px;
-    display: inline-block;
-    background-color: #ffffff;
-    color: #000000;
-    border-color: #000000;
-}
-
-input { 
-    text-align: center; 
-}
-
-/* Submit Button */
-
-.submitButton {
-    color: #0696d9;
-    background-color: #ffffff;
-    padding: 15px 32px;
-    text-align: center;
-    display: inline-block;
-    font-size: 27px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.submitButton:hover {
-    background-color:#0696d9;
-    color: rgb(255, 255, 255);
-    transition: 0.5s;
-}
-
-.submitButton:active {
-    background-color: #1f48b8;
-    color: #ffffff
+#image {
+    visibility: hidden;
 }
