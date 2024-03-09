@@ -10,11 +10,13 @@ class uselessClass {
     }
 }
 
-const object1 = new uselessClass("AUF1 cannon in Lebanon", "./image/AUF1.jpg", "A UN AMX AuF1 self-propelled artillery piece in Lebanon in 2016", "Fantassin 72", "October 17, 2006");
-const object2 = new uselessClass("APC passes Presidency building in Sarajevo", "./image/APC.jpg", "A United Nations Protection Force (UNPROFOR) armoured personnel carrier passes the Presidency building in Sarajevo in the winter of 1992-1993", "Christian Marechal", "March 1993");
-const object3 = new uselessClass("Ukrainian helicopter during a special operation accompany MONUSCO aviation", "./image/HELICOPTER.jpg", "Ituri Province, DR Congo: Ukrainian helicopter during a special operation accompany MONUSCO aviation", "Nazar Voloshyn", "Earlier than 2016, unable to find exact date")
+const object1 = new uselessClass("AUF1 cannon in Lebanon", "./image/AUF1.jpg", "A UN AMX AuF1 self-propelled artillery piece in Lebanon in 2016.", "Fantassin 72", "October 17, 2006");
+const object2 = new uselessClass("APC passes Presidency building in Sarajevo", "./image/APC.jpg", "A United Nations Protection Force (UNPROFOR) armoured personnel carrier passes the Presidency building in Sarajevo in the winter of 1992-1993.", "Christian Marechal", "March 1993");
+const object3 = new uselessClass("Ukrainian helicopter during a special operation accompany MONUSCO aviation", "./image/HELICOPTER.jpg", "Ituri Province, DR Congo: Ukrainian helicopter during a special operation accompany MONUSCO aviation.", "Nazar Voloshyn", "Earlier than 2016, unable to find exact date")
+const object4 = new uselessClass("Denel Rooivalk from the MONUSCO in flight", "./image/HELI.jpg", "MONUSCO's Attack Helicopter providing aerial and ground protection of a convoy carrying FDLR Ex-Combatants on their de-induction from Kanyabayonga transit camp.", "MONUSCO Photos", "5 January 2015");
+const object5 = new uselessClass("Sisu XA-180 in the Snow", "./image/SNOWSISU.jpg", "Sisu XA-180 in the snow, close to the israeli border in South-Lebanon.", "H. Dahlmo", "1998")
 
-const objectArray = [object1, object2, object3]
+const objectArray = [object1, object2, object3, object4, object5];
 
 
 function buttonChecker(){
@@ -32,9 +34,9 @@ function buttonChecker(){
 
 function randomSort(){
     do {
-        const randomNumber = Math.floor(Math.random() * 3)
+        const randomNumber = Math.floor(Math.random() * 5)
         if (!numberArray.includes(randomNumber)) {
             numberArray.push(randomNumber);
         }
-    } while (numberArray.length < 3);
+    } while (numberArray.length < 5);
 }
