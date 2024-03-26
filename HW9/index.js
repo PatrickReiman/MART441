@@ -7,6 +7,7 @@ let target = {};
 let value = {};
 var count = 0;
 
+//no idea why these are crossed out
 $(document).ready(function () {
     $('#button').click(function () {
         $.getJSON("http://api.open-notify.org/iss-now.json", function (data) {
@@ -27,19 +28,19 @@ $(document).ready(function () {
 //x: latitude y: longitude
 
 function findClosest(value, target){
-    console.log(value[1].Latitude);
+    console.log(value[1].Latitude); //error checkers that tell me if a failure occurs before the loop
     console.log(target.iss_position.latitude);
 
     for (var i = 0; i < value.length; i ++) {
         if (bestDistance < Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (-target.iss_position.longitude - value[i].Longitude))){
             tempClosestCityNumber = i;
             bestDistance = Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (-target.iss_position.longitude - value[i].Longitude));
-            console.log("closer");
+            console.log("closer"); //just cool to see that it only takes 10 switches to narrow down over 47k cities across the world
         } else {
             count++;
         }
     }
-    console.log("count: " + count);
+    console.log("count: " + count); //lets me know if it skipped some cities for some reason
     document.getElementById("closestCity").innerHTML = "Closest [Major] City: " + value[tempClosestCityNumber].City;
 }
 
