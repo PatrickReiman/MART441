@@ -2,7 +2,7 @@ let currentLat = 0;
 let tempLat = 0;
 let tempClosestCityNumber = 0;
 const tempLatLong = [];
-let bestDistance = 0;
+let bestDistance = 100;
 let target = {};
 let value = {};
 var count = 0;
@@ -32,9 +32,9 @@ function findClosest(value, target){
     console.log(target.iss_position.latitude);
 
     for (var i = 0; i < value.length; i ++) {
-        if (bestDistance < Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (-target.iss_position.longitude - value[i].Longitude))){
+        if (bestDistance > Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (target.iss_position.longitude - value[i].Longitude)^2)){
             tempClosestCityNumber = i;
-            bestDistance = Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (-target.iss_position.longitude - value[i].Longitude));
+            bestDistance = Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (target.iss_position.longitude - value[i].Longitude)^2);
             console.log("closer"); //just cool to see that it only takes 10 switches to narrow down over 47k cities across the world
         } else {
             count++;
@@ -42,5 +42,8 @@ function findClosest(value, target){
     }
     console.log("count: " + count); //lets me know if it skipped some cities for some reason
     document.getElementById("closestCity").innerHTML = "Closest [Major] City: " + value[tempClosestCityNumber].City;
+    count = 0;
+    bestDistance = 0;
+    tempClosestCityNumber = 0;
 }
 
