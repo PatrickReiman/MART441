@@ -1,61 +1,32 @@
 <html>
-
-<head>
-    <title>OOP</title>
-    <script>
-        class Person {
-			constructor( eyeColor, hairColor, speed, distance ) {
-				this.eyeColor = eyeColor;
-				this.hairColor = hairColor;
-				this.speed = speed;
-				this.distance = distance;
-			}
-			get eColor() {
-				return this.eyeColor;
-			}
-			set eColor(eyeColor) {
-				this.eyeColor = eyeColor;
-			}
-			walk() {
-				return 'I am walking across the frozen tundra at ' + this.speed + ' miles per hour';
-			}
-			timeToTravel()
-			{
-				let time = this.distance/this.speed;
-				return "It will take approximately " + Math.round(time) + " hours to cover " + this.distance + " miles.";
-			}
-			toString() {
-				let str;
-				str = 'This person has ' + 
-				this.eyeColor + ' eyes, has '
-				+ this.hairColor +
-				' hair, and is currently moving at ' + 
-				this.speed + ' miles per hour.';
-				return str;
-			}
-		}
-
-        function createAndShow()
-        {
-		        let myPerson = new Person( 'blue', 'brown',3,10);
-                document.getElementById("myWalk").innerHTML = myPerson.walk();
-				document.getElementById("myTimeToTravel").innerHTML = myPerson.timeToTravel();
-				document.getElementById("myPerson").innerHTML = myPerson.toString();
+   <head>
+      <title>The jQuery Example</title>
+      <script type = "text/javascript" 
+         src = "https://www.tutorialspoint.com/jquery/jquery-3.6.0.js">
+      </script>
+		
+      <script type = "text/javascript" language = "javascript">
+         $(document).ready(function() {
+			
+            $("#driver").click(function(event){
+               $.getJSON('result.json', function(jd) {
+                  $('#stage').html('<p> Name: ' + jd.name + '</p>');
+                  $('#stage').append('<p>Age : ' + jd.age+ '</p>');
+                  $('#stage').append('<p> Sex: ' + jd.sex+ '</p>');
+               });
+            });
 				
-                    
-            
-        }
-    </script>
-</head>
-<body>
-	<div id="myWalk"></div>
-	<div id="myTimeToTravel"></div>
-    <div id="myPerson"></div>
-    
-
-    <script>
-        createAndShow();
-        
-    </script>
-</body>
+         });
+      </script>
+   </head>
+	
+   <body>
+      <p>Click on the button to load result.html file:</p>
+		
+      <div id = "stage" style = "background-color:#cc0;">
+         STAGE
+      </div>
+		
+      <input type = "button" id = "driver" value = "Load Data" />
+   </body>
 </html>
