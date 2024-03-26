@@ -40,7 +40,7 @@ function findClosest(value, target){
         }
     }
     console.log("count: " + count); //lets me know if it skipped some cities for some reason
-    document.getElementById("closestCity").innerHTML = "Closest [Major] City: " + value[tempClosestCityNumber].City;
+    document.getElementById("closestCity").innerHTML = "Closest [Major] City: " + value[tempClosestCityNumber].City + ", " + value[tempClosestCityNumber].Country;
     count = 0;
     bestDistance = 100;
     tempClosestCityNumber = 0;
