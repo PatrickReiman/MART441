@@ -7,7 +7,6 @@ let target = {};
 let value = {};
 var count = 0;
 
-//no idea why these are crossed out
 $(function () {
     $('#button').on("click", function () {
         $.getJSON("https://api.wheretheiss.at/v1/satellites/25544", function (data) {
