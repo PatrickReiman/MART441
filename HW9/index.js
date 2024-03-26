@@ -10,9 +10,9 @@ var count = 0;
 //no idea why these are crossed out
 $(function () {
     $('#button').on("click", function () {
-        $.getJSON("https://api.open-notify.org/iss-now.json", function (data) {
-            document.getElementById("lat").innerHTML = "Latitude: " + data.iss_position.latitude;
-            document.getElementById("long").innerHTML = "Longitude: " + data.iss_position.longitude;
+        $.getJSON("https://api.wheretheiss.at/v1/satellites/25544", function (data) {
+            document.getElementById("lat").innerHTML = "Latitude: " + data.latitude.toFixed(4);
+            document.getElementById("long").innerHTML = "Longitude: " + data.longitude.toFixed(4);
             target = data;
             findClosest(value, target);
             //goes second
@@ -29,12 +29,12 @@ $(function () {
 
 function findClosest(value, target){
     console.log(value[1].Latitude); //error checkers that tell me if a failure occurs before the loop
-    console.log(target.iss_position.latitude);
+    console.log(target.latitude);
 
     for (var i = 0; i < value.length; i ++) {
-        if (bestDistance > Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (target.iss_position.longitude - value[i].Longitude)^2)){
+        if (bestDistance > Math.sqrt((target.latitude - value[i].Latitude)^2 + (target.longitude - value[i].Longitude)^2)){
             tempClosestCityNumber = i;
-            bestDistance = Math.sqrt((target.iss_position.latitude - value[i].Latitude)^2 + (target.iss_position.longitude - value[i].Longitude)^2);
+            bestDistance = Math.sqrt((target.latitude - value[i].Latitude)^2 + (target.longitude - value[i].Longitude)^2);
             console.log("closer"); //just cool to see that it only takes 10 switches to narrow down over 47k cities across the world
         } else {
             count++;
