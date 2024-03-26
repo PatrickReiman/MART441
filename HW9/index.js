@@ -10,7 +10,7 @@ var count = 0;
 //no idea why these are crossed out
 $(function () {
     $('#button').on("click", function () {
-        $.getJSON("http://api.open-notify.org/iss-now.json", function (data) {
+        $.getJSON("https://api.open-notify.org/iss-now.json", function (data) {
             document.getElementById("lat").innerHTML = "Latitude: " + data.iss_position.latitude;
             document.getElementById("long").innerHTML = "Longitude: " + data.iss_position.longitude;
             target = data;
