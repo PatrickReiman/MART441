@@ -1,9 +1,12 @@
-$(document).ready(function() { 
-    $("#button").click(function(event){
-       $.getJSON('test.json', function(jd) {
-          $('#container').html('<p> Name: ' + jd.name + '</p>');
-          $('#container').append('<p>Age : ' + jd.age+ '</p>');
-          $('#container').append('<p> Sex: ' + jd.sex+ '</p>');
-       });
-    });  
- });
+function jQuerytest(){
+    $
+      $.getJSON("test.json").success(function(result) {
+          $.each(result, function(i, field) {
+               $("div")
+                .append("<p>" + field + "</p>");
+          });
+      })
+      .error(function(error){
+          console.log(error);
+      });
+}
