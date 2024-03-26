@@ -1,49 +1,55 @@
 let currentLat = 0;
 let tempLat = 0;
 let num = 0;
+let count = 0;
 
 $(document).ready(function () {
   $('#json').click(function () {
       $.getJSON("http://api.open-notify.org/iss-now.json", function (data) {
           currentLat = data.iss_position.latitude;
-          console.log(data.iss_position.latitude);  
+          console.log(currentLat);
+          target = currentLat;
         });
       $.getJSON("https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW9/cities.json", function (value) {
-        tempLat = value;
-        console.log(tempLat);
-  });
+          tempLat = value[num].Latitude
+          console.log(findClosest(value, target));
+          console.log("count: " + count);
+      });
   });
   });
 
 
-function findClosest(arr, target)
-{
-    let n = arr.length;
- 
+function findClosest(value, target){
+    let n = value.length; // correctly working
+
+
     // Corner cases
-    if (target <= arr[0])
-        return arr[0];
-    if (target >= arr[n - 1])
-        return arr[n - 1];
- 
+    if (target <= value[0].Latitude)
+      console.log("first");
+      return value[0].Latitude;
+    if (target >= value[n - 1].Latitude)
+      console.log("second");
+      return value[n - 1].Latitude; 
+
+    console.log("here?");
     // Doing binary search 
     let i = 0, j = n, mid = 0;
-    while (i < j) 
-    {
+    while (i < j) {
+      count++;
         mid = (i + j) / 2;
  
-        if (arr[mid] == target)
-            return arr[mid];
+        if (value[mid].Latitude == target)
+            return value[mid].Latitude;
  
         // If target is less than array 
         // element,then search in left 
-        if (target < arr[mid])
+        if (target < value[mid].Latitude)
         {
       
             // If target is greater than previous
             // to mid, return closest of two
-            if (mid > 0 && target > arr[mid - 1]) 
-                return getClosest(arr[mid - 1], arr[mid], target);
+            if (mid > 0 && target > value[mid - 1].Latitude) 
+                return getClosest(value[mid - 1].Latitude, value[mid].Latitude, target);
                
             // Repeat for left half 
             j = mid;              
@@ -52,14 +58,15 @@ function findClosest(arr, target)
         // If target is greater than mid
         else
         {
-            if (mid < n - 1 && target < arr[mid + 1]) 
-                return getClosest(arr[mid], arr[mid + 1], target);                
+            if (mid < n - 1 && target < value[mid + 1].Latitude) 
+                return getClosest(value[mid].Latitude, value[mid + 1].Latitude, target);                
             i = mid + 1; // update i
         }
     }
  
+    console.log("here?");
     // Only single element left after search
-    return arr[mid];
+    return value[mid].Latitude;
 }
  
 // Method to compare which one is the more close
@@ -73,10 +80,3 @@ function getClosest(val1, val2, target) {
     else
         return val1;        
 }
- 
-// Driver Code
-let arr = [1, 2, 4, 5, 6, 6, 8, 9];
-let target = 4.5;
- 
-document.write(findClosest(arr, target));
-document.write(arr);
