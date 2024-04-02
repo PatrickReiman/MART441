@@ -7,13 +7,13 @@
     <title>a square game?</title>
 </head>
 
-<body onKeyDown = "test(event)";>
+<body onKeyDown = "movement(event)";>
     <h1 id = "h1">You've got to be kidding me</h1>
-        <div class = "container">
-            <canvas id = "squareTemp" width = "1000" height = "700"></canvas>
-        </div>
+        <!-- Canvas is weird and works better when the style is directly loaded from HTML -->
+        <canvas id = "squareTemp" width = "1000" height = "700" style = "border: 10px groove #ffffff;"></canvas>
+        
         <script>
             randomColor();
-            makeSquare();
+            initialMakeSquare();
         </script>
 </body>

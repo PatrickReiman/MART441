@@ -1,6 +1,9 @@
-color = "";
+temp = 3;
 
-while (color.length < 7) {
-    color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    console.log(color);
+while (temp > 0.1){
+    x = (Math.random() * (2 - 0.5) + 0.5).toFixed(1);
+    if (temp > x){
+        temp = x;
+    }
+    console.log(temp);
 }
