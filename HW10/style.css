@@ -16,13 +16,12 @@ body {
     height: 700px;
 }
 
+/* For some reason if you define the height and width in here it entirely screws up size formatting and also makes the resulting canvas blurry?  */
 canvas {
     margin-left: auto;
     margin-right: auto;
     position: fixed;
     color: #000000;
-    width: 1000px;
-    height: 700px;
 }
 
 h1 {

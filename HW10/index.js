@@ -1,4 +1,4 @@
-class superSqaure {
+class superSquare {
     constructor(xCord, yCord, scaling, color){
         this.xCord = xCord;
         this.yCord = yCord;
@@ -41,27 +41,41 @@ class superSqaure {
 
 function randomColor(){
     color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    while (color.length <= 5) {
+        color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    }
     console.log(color);
 }
 
 function makeSquare() {
-    const x = document.getElementById("squareTemp");
-    const ctx = x.getContext("2d");
-    playerSquare = new superSqaure(window.innerWidth/2, window.innerHeight/2, 100, color);
-    playerSquare.changeColor(color);
-    ctx.fillStyle = "red";
-    ctx.fillRect(200, 200, 50, 50);
+    const squareTemp = document.getElementById("squareTemp");
+    const ctx = squareTemp.getContext("2d");
+    playerSquare = new superSquare((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 100, color);
+    ctx.fillStyle = color;
+    ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
 }
 
 function test(event) {
     //this is the one line of code I've seen an AI steal (unfortunately I could not find from where) that worked better than any human could suggest, so many people trying to over-engineer a simple random number generator when this works fine
     //Actually interesting how well this works, picks random number from 0 to 16,777,215, which is how many different colors there are in base 16 when converted to base 10. Then it uses toString(16) to convert the base 10 number into a base 16 value, allowing it to be used to find a random color
-    color = "#" + Math.floor(Math.random() * 16777215).toString(16);
     console.log(event.key);
-
+    console.log(playerSquare.currentyCord);
+    if (event.key == "w") {
+        playerSquare.changeyCord(playerSquare.currentyCord - 10);
+    } else if (event.key == "s") {
+        playerSquare.changeyCord(playerSquare.currentyCord + 10);
+    } else if (event.key == "d") {
+        playerSquare.changexCord(playerSquare.currentxCord + 10);
+    } else if (event.key == "a") {
+        playerSquare.changexCord(playerSquare.currentxCord - 10);
+    }
+    squares();
+        console.log("wrong key bro");
+    
 }
 
 function squares() {
+
     //x , y, width, height
     ctx.fillStyle = playerSquare.currentColor;
 }
