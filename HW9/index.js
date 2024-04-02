@@ -34,7 +34,7 @@ function findClosest(value, target){
         if (bestDistance > Math.sqrt((target.latitude - value[i].Latitude)^2 + (target.longitude - value[i].Longitude)^2)){
             tempClosestCityNumber = i;
             bestDistance = Math.sqrt((target.latitude - value[i].Latitude)^2 + (target.longitude - value[i].Longitude)^2);
-            console.log("closer"); //just cool to see that it only takes 10 switches to narrow down over 47k cities across the world
+            console.log(bestDistance); //just cool to see that it only takes 10 switches to narrow down over 47k cities across the world
         } else {
             count++;
         }
