@@ -39,18 +39,19 @@ class superSquare {
     }
 }
 
+color = "";
+
 function randomColor(){
-    color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-    while (color.length <= 5) {
+    while (color.length < 7) {
         color = "#" + Math.floor(Math.random() * 16777215).toString(16);
     }
     console.log(color);
 }
 
 function makeSquare() {
-    const squareTemp = document.getElementById("squareTemp");
-    const ctx = squareTemp.getContext("2d");
-    playerSquare = new superSquare((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 100, color);
+    squareTemp = document.getElementById("squareTemp");
+    ctx = squareTemp.getContext("2d");
+    playerSquare = new superSquare((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 1, color);
     ctx.fillStyle = color;
     ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
 }
@@ -69,13 +70,11 @@ function test(event) {
     } else if (event.key == "a") {
         playerSquare.changexCord(playerSquare.currentxCord - 10);
     }
-    squares();
-        console.log("wrong key bro");
-    
+    squares();    
 }
 
 function squares() {
-
-    //x , y, width, height
-    ctx.fillStyle = playerSquare.currentColor;
+    ctx.clearRect(0, 0, 1000, 700)
+    ctx.fillStyle = color;
+    ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.scaling), (50*playerSquare.scaling));
 }
