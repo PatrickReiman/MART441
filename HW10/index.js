@@ -63,20 +63,20 @@ function initialMakeSquare() {
     ctx.fillStyle = color;
     ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
 
-    nonPlayableSquare = new superSquare(Math.floor(Math.random() * squareTemp.width), Math.floor(Math.random() * squareTemp.height), 1, "red");
+    nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 100)), Math.floor(Math.random() * (squareTemp.height - 100)), 1, "red");
     ctx.fillStyle = "red";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 100, 100);
 }
 
 function movement(event) {
     if (event.key == "w") {
-        playerSquare.changeyCord(playerSquare.currentyCord - 10);
+        playerSquare.changeyCord(playerSquare.currentyCord - 20);
     } else if (event.key == "s") {
-        playerSquare.changeyCord(playerSquare.currentyCord + 10);
+        playerSquare.changeyCord(playerSquare.currentyCord + 20);
     } else if (event.key == "d") {
-        playerSquare.changexCord(playerSquare.currentxCord + 10);
+        playerSquare.changexCord(playerSquare.currentxCord + 20);
     } else if (event.key == "a") {
-        playerSquare.changexCord(playerSquare.currentxCord - 10);
+        playerSquare.changexCord(playerSquare.currentxCord - 20);
     }
 
     squares();   
@@ -87,8 +87,8 @@ function movement(event) {
         playerSquare.changeColor(color);
         playerSquare.changeScaling((Math.random() * (3 - 0.2) + 0.2).toFixed(1));
 
-        nonPlayableSquare.changexCord(Math.floor(Math.random() * squareTemp.width));
-        nonPlayableSquare.changeyCord(Math.floor(Math.random() * squareTemp.height));
+        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 100)));
+        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 100)));
         squares();
         setTimeout(function(){
             document.body.style.backgroundImage = "";
