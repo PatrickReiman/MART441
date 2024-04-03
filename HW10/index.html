@@ -7,10 +7,12 @@
 </head>
 
 <body onKeyDown = "movement(event)";>
-    <h1 id = "h1">You've got to be kidding me</h1>
+    <h1 id = "h1">You're a square</h1>
         <!-- Canvas is weird and works better when the style is directly loaded from HTML -->
         <canvas id = "squareTemp" width = "1000" height = "700" style = "border: 10px groove #ffffff;"></canvas>
-        
+            <audio id = "music" src = "./audio/music.mp3" preload = "auto"></audio>
+        <!-- Can't autoplay music so I need them to click a button to enable it -->
+            <button id = "button" class = "button" onclick = "playMusic();">Play Music</button>
         <script>
             randomColor();
             initialMakeSquare();

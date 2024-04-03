@@ -39,7 +39,13 @@ class superSquare {
     }
 }
 
-function randomColor(){
+function playMusic() {
+    document.getElementById("music").loop = true;
+    document.getElementById("music").play();
+    document.getElementById("music").volume = 0.5;
+}
+
+function randomColor() {
     color = "";
     //had to fix the AI slop though with the while loop since it sometimes threw out values that didn't work in hexadecimal
     while (color.length < 7) {
@@ -76,6 +82,7 @@ function movement(event) {
     squares();   
 
     if (overlap(playerSquare, nonPlayableSquare)){
+        document.body.style.backgroundImage = "url('./img/mark.jpg')";
         randomColor();
         playerSquare.changeColor(color);
         playerSquare.changeScaling((Math.random() * (3 - 0.2) + 0.2).toFixed(1));
@@ -83,7 +90,12 @@ function movement(event) {
         nonPlayableSquare.changexCord(Math.floor(Math.random() * squareTemp.width));
         nonPlayableSquare.changeyCord(Math.floor(Math.random() * squareTemp.height));
         squares();
-    } 
+        setTimeout(function(){
+            document.body.style.backgroundImage = "";
+            return false;
+        }, 500);
+    }
+    outOfBounds();
 }
 
 //draw starts from top left corner, this is where the x, y is centered on
@@ -106,4 +118,21 @@ function overlap(playerSquare, nonPlayableSquare){
     && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 100))){
         return(true);
     }
+}
+
+function outOfBounds(){
+    if ((playerSquare.currentyCord + (50*playerSquare.currentScaling)) > squareTemp.height){
+        //bottom 
+        playerSquare.changeyCord(0);
+    } else if ((playerSquare.currentyCord) < 0) {
+        //top
+        playerSquare.changeyCord(squareTemp.height - (50*playerSquare.currentScaling));
+    } else if ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) > squareTemp.width) {
+        //right
+        playerSquare.changexCord(0);
+    } else if ((playerSquare.currentxCord) < 0) {
+        //left
+        playerSquare.changexCord(squareTemp.width - (50*playerSquare.currentScaling));
     }
+    squares();
+}
