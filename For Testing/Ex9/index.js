@@ -63,6 +63,7 @@ function initialMakeSquare() {
 }
 
 function movement(event) {
+    console.log(event.key);
     if (event.key == "w") {
         playerSquare.changeyCord(playerSquare.currentyCord - 10);
     } else if (event.key == "s") {
@@ -78,10 +79,17 @@ function movement(event) {
     if (overlap(playerSquare, nonPlayableSquare)){
         randomColor();
         playerSquare.changeColor(color);
-        playerSquare.changeScaling((Math.random() * (3 - 0.2) + 0.2).toFixed(1));
+        playerSquare.changeScaling((Math.random() * (4 - 0.7) + 0.7).toFixed(1));
+        //playerSquare.changexCord(playerSquare.currentxCord);
+        //playerSquare.changeyCord(playerSquare.currentyCord);
+
+        console.log("worked");
 
         nonPlayableSquare.changexCord(Math.floor(Math.random() * squareTemp.width));
         nonPlayableSquare.changeyCord(Math.floor(Math.random() * squareTemp.height));
+        //nonPlayableSquare.changexCord(nonPlayableSquare.currentxCord);
+        //nonPlayableSquare.changeyCord(nonPlayableSquare.currentyCord);
+
         squares();
     } 
 }
@@ -93,17 +101,38 @@ function squares() {
     ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.currentScaling), (50*playerSquare.currentScaling));
     ctx.fillStyle = "red";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (100*nonPlayableSquare.currentScaling), (100*nonPlayableSquare.currentScaling));
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(100, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(200, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(300, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(400, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(500, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(600, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(700, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(800, 100, 10, 10);
+    ctx.fillStyle = "yellow"
+    ctx.fillRect(900, 100, 10, 10);
 }
 
 function overlap(playerSquare, nonPlayableSquare){
-    //North Facing nonPlayableSquare side and South facing playableSquare side checker
-    if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentyCord)) 
-    //South Facing nonPlayableSquare side and North facing playableSquare side checker
-    && ((playerSquare.currentyCord) <= (nonPlayableSquare.currentyCord + 100))) 
-    //West facing nonPlayableSquare side and East facing playableSquare side checker
-    && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentxCord)) 
-    //East facing nonPlayableSquare side and West facing playableSquare side checker
-    && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 100))){
+    console.log("left: " + (nonPlayableSquare.currentyCord));
+    console.log("left: " + (playerSquare.currentyCord));
+    console.log("");
+    console.log("right: " + (nonPlayableSquare.currentyCord + 100));
+    console.log("right: " + (playerSquare.currentyCord + (50*playerSquare.currentScaling)));
+    console.log("");
+    console.log(playerSquare.currentScaling);
+
+    //-25 (first) is top, +75 (second) is bottom of nonPlayableSquare, the same holds true for right and left respectively
+    if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentyCord)) && ((playerSquare.currentyCord) <= (nonPlayableSquare.currentyCord + 100))) &&
+    ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentxCord)) && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 100))){
         return(true);
     }
-    }
+}
