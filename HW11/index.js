@@ -148,7 +148,17 @@ function readJSONData() {
         .then(response => 
             response.json())
         .then(data =>
-            console.log(data))
+            drawObstacles(data))
         .catch(error =>
             console.log(error))
+}
+
+
+
+function drawObstacles(data){
+    for (var i = 0; i < 5; i ++) {
+        obstacleSquare = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
+        ctx.fillStyle = "#" + data.color;
+        ctx.fillRect(obstacleSquare.currentxCord, obstacleSquare.currentyCord, 100, 100);
+    }
 }
