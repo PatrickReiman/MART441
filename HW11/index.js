@@ -39,6 +39,33 @@ class superSquare {
     }
 }
 
+//response: request API to get JSON file
+//data: how you access the data from the response request
+//catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
+// .x, the period means current directory (folder it is in)
+
+var global = [];
+
+function readJSONData() {
+    fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
+        .then(response => 
+            response.json())
+        .then(data =>
+            initialDrawObstacles(data))
+        .catch(error =>
+            console.log(error))
+}
+
+function initialDrawObstacles(data) {
+    global = data;
+    console.log("second");
+    for (var i = 0; i < 5; i ++) {
+        window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
+        ctx.fillStyle = data[i].color;
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+    }
+}
+
 function playMusic() {
     document.getElementById("music").loop = true;
     document.getElementById("music").play();
@@ -56,6 +83,7 @@ function randomColor() {
 }
 
 function initialMakeSquare() {
+    console.log("first");
     squareTemp = document.getElementById("squareTemp");
     ctx = squareTemp.getContext("2d");
 
@@ -66,6 +94,9 @@ function initialMakeSquare() {
     nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
     ctx.fillStyle = "green";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 25, 25);
+    if (overlapNPC(nonPlayableSquare)){
+        console.log("lol");
+    }
 }
 
 score = 0;
@@ -92,7 +123,7 @@ function movement(event) {
         nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
         nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
         squares();
-        setTimeout(function(){
+        setTimeout(function() {
             document.body.style.backgroundImage = "";
             return false;
         }, 500);
@@ -115,7 +146,7 @@ function squares() {
     }
 }
 
-function overlap(playerSquare, nonPlayableSquare){
+function overlap(playerSquare, nonPlayableSquare) {
     //North Facing nonPlayableSquare side and South facing playableSquare side checker
     if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentyCord)) 
     //South Facing nonPlayableSquare side and North facing playableSquare side checker
@@ -128,7 +159,7 @@ function overlap(playerSquare, nonPlayableSquare){
     }
 }
 
-function outOfBounds(){
+function outOfBounds() {
     if ((playerSquare.currentyCord + (50*playerSquare.currentScaling)) > squareTemp.height){
         //bottom 
         playerSquare.changeyCord(0);
@@ -145,28 +176,15 @@ function outOfBounds(){
     squares();
 }
 
-//response: request API to get JSON file
-//data: how you access the data from the response request
-//catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
-// .x, the period means current directory (folder it is in)
-
-var global = [];
-
-function readJSONData() {
-    fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
-        .then(response => 
-            response.json())
-        .then(data =>
-            initialDrawObstacles(data))
-        .catch(error =>
-            console.log(error))
-}
-
-function initialDrawObstacles(data){
-    global = data;
-    for (var i = 0; i < 5; i ++) {
-        window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
-        ctx.fillStyle = data[i].color;
-        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+function overlapNPC(nonPlayableSquare) {
+    for (var i = 0; i < 5; i ++){
+        console.log(global);
+        console.log(obstacleSquare[0].currentyCord);
+        if ((((window['global'+i].currentyCord + 100) >= (nonPlayableSquare.currentyCord)) 
+        && ((window['global'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
+        && ((window['global'+i].currentxCord + 100) >= (nonPlayableSquare.currentxCord)) 
+        && ((window['global'+i].currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
+            return(true);
+        }
     }
 }
