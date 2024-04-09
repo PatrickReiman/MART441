@@ -1,31 +1,31 @@
 [
     {
-        "xCord": 150,
-        "yCord": 150,
+        "xCord": 200,
+        "yCord": 140,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 650,
-        "yCord": 150,
+        "xCord": 700,
+        "yCord": 140,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 500,
-        "yCord": 150,
+        "xCord": 700,
+        "yCord": 460,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 500,
-        "yCord": 650,
+        "xCord": 200,
+        "yCord": 460,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 500,
-        "yCord": 150,
+        "xCord": 450,
+        "yCord": 140,
         "scaling": 1,
         "color": "red"
     }

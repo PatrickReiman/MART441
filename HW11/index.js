@@ -157,6 +157,11 @@ function initialDrawObstacles(data){
     for (var i = 0; i < 5; i ++) {
         obstacleSquare = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = "#" + data.color;
-        ctx.fillRect(obstacleSquare.currentxCord, obstacleSquare.currentyCord, 100, 100);
+        ctx.fillRect(700, 460, 100, 100);
+        console.log((squareTemp.width / 5));
+        console.log((squareTemp.height / 5));
     }
 }
+
+//200
+//140
