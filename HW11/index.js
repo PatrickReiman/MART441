@@ -60,7 +60,7 @@ function initialDrawObstacles(data) {
     for (var i = 0; i < 5; i ++) {
         window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = data[i].color;
-        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
     }
     while (overlapNPC(nonPlayableSquare)){
         nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
@@ -100,20 +100,16 @@ function initialMakeSquare() {
 }
 
 score = 0;
-positionTracker = 0;
-savedKey = "";
-switchSign = 1;
 
 function movement(event) {
     if (touchCollision(playerSquare)){
-        switchSign = -1;
-        console.log("touching cannot move")
-        pressingKeys(playerSquare, event);
+        resetOnDeath(playerSquare);
     } else {
         pressingKeys(playerSquare, event);
-        switchSign = 1;
+        if (touchCollision(playerSquare)){
+            resetOnDeath(playerSquare);
+        }
     }
-    switchSign = 1;
 
     squares();   
 
@@ -142,16 +138,23 @@ function movement(event) {
     outOfBounds();
 }
 
+function resetOnDeath(playerSquare) {
+    score--;
+    document.getElementById("h1").innerHTML = "Score: " + score;
+    playerSquare.changexCord((squareTemp.width / 2) - (25*playerSquare.currentScaling));
+    playerSquare.changeyCord((squareTemp.height / 2) - (25*playerSquare.currentScaling));
+    squares();
+}
+
 function pressingKeys(playerSquare, event) {
-    console.log(event.key);
     if (event.key == "w") {
-        playerSquare.changeyCord(playerSquare.currentyCord - (20*switchSign));
+        playerSquare.changeyCord(playerSquare.currentyCord - 20);
     } else if (event.key == "s") {
-        playerSquare.changeyCord(playerSquare.currentyCord + (20*switchSign));
+        playerSquare.changeyCord(playerSquare.currentyCord + 20);
     } else if (event.key == "d") {
-        playerSquare.changexCord(playerSquare.currentxCord + (20*switchSign));
+        playerSquare.changexCord(playerSquare.currentxCord + 20);
     } else if (event.key == "a") {
-        playerSquare.changexCord(playerSquare.currentxCord - (20*switchSign));
+        playerSquare.changexCord(playerSquare.currentxCord - 20);
     }
 }
 
@@ -164,7 +167,7 @@ function squares() {
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (25*nonPlayableSquare.currentScaling), (25*nonPlayableSquare.currentScaling));
     for (var i = 0; i < 5; i ++) {
         ctx.fillStyle = "red";
-        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
     }
 }
 
@@ -200,9 +203,9 @@ function outOfBounds() {
 
 function overlapNPC(nonPlayableSquare) {
     for (var i = 0; i < 5; i ++){
-        if ((((window['obstacleSquare'+i].currentyCord + 100) >= (nonPlayableSquare.currentyCord)) 
+        if ((((window['obstacleSquare'+i].currentyCord + 50) >= (nonPlayableSquare.currentyCord)) 
         && ((window['obstacleSquare'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
-        && ((window['obstacleSquare'+i].currentxCord + 100) >= (nonPlayableSquare.currentxCord)) 
+        && ((window['obstacleSquare'+i].currentxCord + 50) >= (nonPlayableSquare.currentxCord)) 
         && ((window['obstacleSquare'+i].currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
             return(true);
         }
@@ -212,9 +215,9 @@ function overlapNPC(nonPlayableSquare) {
 function touchCollision(playerSquare) {
     for (var i = 0; i < 5; i ++){
         if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentyCord)) 
-        && ((playerSquare.currentyCord) <= (window['obstacleSquare'+i].currentyCord + 100))) 
+        && ((playerSquare.currentyCord) <= (window['obstacleSquare'+i].currentyCord + 50))) 
         && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentxCord)) 
-        && ((playerSquare.currentxCord) <= (window['obstacleSquare'+i].currentxCord + 100))){
+        && ((playerSquare.currentxCord) <= (window['obstacleSquare'+i].currentxCord + 50))){
             return(true);
     }
     }
