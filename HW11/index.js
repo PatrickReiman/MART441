@@ -52,6 +52,7 @@ function randomColor() {
         //this is the one line of code I've seen an AI steal (unfortunately I could not find from where) that worked better than any human could suggest, so many people trying to over-engineer a simple random number generator when this works fine
         //Actually interesting how well this works, picks random number from 0 to 16,777,215, which is how many different colors there are in base 16 when converted to base 10. Then it uses toString(16) to convert the base 10 number into a base 16 value, allowing it to be used to find a random color
         color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+        console.log(color);
     }
 }
 
@@ -136,3 +137,11 @@ function outOfBounds(){
     }
     squares();
 }
+
+//test time
+
+
+fetch('./data/anticollisiondata.json')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(error));
