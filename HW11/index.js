@@ -57,12 +57,16 @@ function readJSONData() {
 }
 
 function initialDrawObstacles(data) {
-    global = data;
-    console.log("second");
     for (var i = 0; i < 5; i ++) {
         window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = data[i].color;
         ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+    }
+    while (overlapNPC(nonPlayableSquare)){
+        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+        squares();
+        console.log("overlap");
     }
 }
 
@@ -83,7 +87,6 @@ function randomColor() {
 }
 
 function initialMakeSquare() {
-    console.log("first");
     squareTemp = document.getElementById("squareTemp");
     ctx = squareTemp.getContext("2d");
 
@@ -94,22 +97,18 @@ function initialMakeSquare() {
     nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
     ctx.fillStyle = "green";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 25, 25);
-    if (overlapNPC(nonPlayableSquare)){
-        console.log("lol");
-    }
 }
 
 score = 0;
+positionTracker = -1;
+savedKey = "";
+switchSign = 1;
 
 function movement(event) {
-    if (event.key == "w") {
-        playerSquare.changeyCord(playerSquare.currentyCord - 20);
-    } else if (event.key == "s") {
-        playerSquare.changeyCord(playerSquare.currentyCord + 20);
-    } else if (event.key == "d") {
-        playerSquare.changexCord(playerSquare.currentxCord + 20);
-    } else if (event.key == "a") {
-        playerSquare.changexCord(playerSquare.currentxCord - 20);
+    if (touchCollision(playerSquare) && positionTracker <= 0){
+        console.log("touching cannot move")
+    } else if(touchCollision(playerSquare) === false) {
+        pressingKeys(playerSquare, event);
     }
 
     squares();   
@@ -122,6 +121,12 @@ function movement(event) {
 
         nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
         nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+        while (overlapNPC(nonPlayableSquare)){
+            nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+            nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+            squares();
+            console.log("overlap");
+        }
         squares();
         setTimeout(function() {
             document.body.style.backgroundImage = "";
@@ -131,6 +136,18 @@ function movement(event) {
         document.getElementById("h1").innerHTML = "Score: " + score;
     }
     outOfBounds();
+}
+
+function pressingKeys(event) {
+    if (event.key == "w") {
+        playerSquare.changeyCord(playerSquare.currentyCord - (20*switchSign));
+    } else if (event.key == "s") {
+        playerSquare.changeyCord(playerSquare.currentyCord + (20*switchSign));
+    } else if (event.key == "d") {
+        playerSquare.changexCord(playerSquare.currentxCord + (20*switchSign));
+    } else if (event.key == "a") {
+        playerSquare.changexCord(playerSquare.currentxCord - (20*switchSign));
+    }
 }
 
 //draw starts from top left corner, this is where the x, y is centered on
@@ -178,13 +195,23 @@ function outOfBounds() {
 
 function overlapNPC(nonPlayableSquare) {
     for (var i = 0; i < 5; i ++){
-        console.log(global);
-        console.log(obstacleSquare[0].currentyCord);
-        if ((((window['global'+i].currentyCord + 100) >= (nonPlayableSquare.currentyCord)) 
-        && ((window['global'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
-        && ((window['global'+i].currentxCord + 100) >= (nonPlayableSquare.currentxCord)) 
-        && ((window['global'+i].currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
+        if ((((window['obstacleSquare'+i].currentyCord + 100) >= (nonPlayableSquare.currentyCord)) 
+        && ((window['obstacleSquare'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
+        && ((window['obstacleSquare'+i].currentxCord + 100) >= (nonPlayableSquare.currentxCord)) 
+        && ((window['obstacleSquare'+i].currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
             return(true);
         }
     }
+}
+
+function touchCollision(playerSquare) {
+    for (var i = 0; i < 5; i ++){
+        if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentyCord)) 
+        && ((playerSquare.currentyCord) <= (window['obstacleSquare'+i].currentyCord + 100))) 
+        && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentxCord)) 
+        && ((playerSquare.currentxCord) <= (window['obstacleSquare'+i].currentxCord + 100))){
+            return(true);
+    }
+    }
+
 }
