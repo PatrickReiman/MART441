@@ -100,16 +100,20 @@ function initialMakeSquare() {
 }
 
 score = 0;
-positionTracker = -1;
+positionTracker = 0;
 savedKey = "";
 switchSign = 1;
 
 function movement(event) {
-    if (touchCollision(playerSquare) && positionTracker <= 0){
+    if (touchCollision(playerSquare)){
+        switchSign = -1;
         console.log("touching cannot move")
-    } else if(touchCollision(playerSquare) === false) {
         pressingKeys(playerSquare, event);
+    } else {
+        pressingKeys(playerSquare, event);
+        switchSign = 1;
     }
+    switchSign = 1;
 
     squares();   
 
@@ -138,7 +142,8 @@ function movement(event) {
     outOfBounds();
 }
 
-function pressingKeys(event) {
+function pressingKeys(playerSquare, event) {
+    console.log(event.key);
     if (event.key == "w") {
         playerSquare.changeyCord(playerSquare.currentyCord - (20*switchSign));
     } else if (event.key == "s") {
