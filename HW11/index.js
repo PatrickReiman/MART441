@@ -138,10 +138,20 @@ function outOfBounds(){
     squares();
 }
 
-//test time
+//response: request API to get JSON file
+//data: how you access the data from the response request
+//catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
+// .x, the period means current directory (folder it is in)
 
 
-fetch('./data/anticollisiondata.json')
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.log(error));
+function readJSONData() {
+    fetch('/data/anticollisiondata.json')
+        .then(response => 
+            response.json())
+        .then(data =>
+            console.log(data))
+        .catch(error =>
+            console.log(error))
+}
+
+console.log(data);
