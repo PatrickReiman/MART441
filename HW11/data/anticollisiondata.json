@@ -1,5 +1,32 @@
 [
     {
-        
+        "xCord": 0,
+        "yCord": 0,
+        "scaling": 1,
+        "color": "red"
+    },
+    {
+        "xCord": 100,
+        "yCord": 100,
+        "scaling": 1,
+        "color": "red"
+    },
+    {
+        "xCord": 200,
+        "yCord": 200,
+        "scaling": 1,
+        "color": "red"
+    },
+    {
+        "xCord": 300,
+        "yCord": 300,
+        "scaling": 1,
+        "color": "red"
+    },
+    {
+        "xCord": 400,
+        "yCord": 400,
+        "scaling": 1,
+        "color": "red"
     }
 ]

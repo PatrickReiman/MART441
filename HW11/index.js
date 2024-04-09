@@ -143,9 +143,8 @@ function outOfBounds(){
 //catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
 // .x, the period means current directory (folder it is in)
 
-
 function readJSONData() {
-    fetch('/data/anticollisiondata.json')
+    fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
         .then(response => 
             response.json())
         .then(data =>
@@ -153,5 +152,3 @@ function readJSONData() {
         .catch(error =>
             console.log(error))
 }
-
-console.log(data);
