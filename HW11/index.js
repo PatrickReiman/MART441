@@ -148,14 +148,12 @@ function readJSONData() {
         .then(response => 
             response.json())
         .then(data =>
-            drawObstacles(data))
+            initialDrawObstacles(data))
         .catch(error =>
             console.log(error))
 }
 
-
-
-function drawObstacles(data){
+function initialDrawObstacles(data){
     for (var i = 0; i < 5; i ++) {
         obstacleSquare = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = "#" + data.color;
