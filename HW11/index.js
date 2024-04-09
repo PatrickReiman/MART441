@@ -52,7 +52,6 @@ function randomColor() {
         //this is the one line of code I've seen an AI steal (unfortunately I could not find from where) that worked better than any human could suggest, so many people trying to over-engineer a simple random number generator when this works fine
         //Actually interesting how well this works, picks random number from 0 to 16,777,215, which is how many different colors there are in base 16 when converted to base 10. Then it uses toString(16) to convert the base 10 number into a base 16 value, allowing it to be used to find a random color
         color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-        console.log(color);
     }
 }
 
@@ -64,10 +63,12 @@ function initialMakeSquare() {
     ctx.fillStyle = color;
     ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
 
-    nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 100)), Math.floor(Math.random() * (squareTemp.height - 100)), 1, "red");
-    ctx.fillStyle = "red";
-    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 100, 100);
+    nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
+    ctx.fillStyle = "green";
+    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 25, 25);
 }
+
+score = 0;
 
 function movement(event) {
     if (event.key == "w") {
@@ -86,15 +87,17 @@ function movement(event) {
         document.body.style.backgroundImage = "url('./img/mark.jpg')";
         randomColor();
         playerSquare.changeColor(color);
-        playerSquare.changeScaling((Math.random() * (3 - 0.2) + 0.2).toFixed(1));
+        playerSquare.changeScaling((Math.random() * (2 - 0.2) + 0.2).toFixed(1));
 
-        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 100)));
-        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 100)));
+        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
         squares();
         setTimeout(function(){
             document.body.style.backgroundImage = "";
             return false;
         }, 500);
+        score++;
+        document.getElementById("h1").innerHTML = "Score: " + score;
     }
     outOfBounds();
 }
@@ -104,19 +107,23 @@ function squares() {
     ctx.clearRect(0, 0, 1000, 700)
     ctx.fillStyle = color;
     ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.currentScaling), (50*playerSquare.currentScaling));
-    ctx.fillStyle = "red";
-    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (100*nonPlayableSquare.currentScaling), (100*nonPlayableSquare.currentScaling));
+    ctx.fillStyle = "green";
+    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (25*nonPlayableSquare.currentScaling), (25*nonPlayableSquare.currentScaling));
+    for (var i = 0; i < 5; i ++) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
+    }
 }
 
 function overlap(playerSquare, nonPlayableSquare){
     //North Facing nonPlayableSquare side and South facing playableSquare side checker
     if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentyCord)) 
     //South Facing nonPlayableSquare side and North facing playableSquare side checker
-    && ((playerSquare.currentyCord) <= (nonPlayableSquare.currentyCord + 100))) 
+    && ((playerSquare.currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
     //West facing nonPlayableSquare side and East facing playableSquare side checker
     && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentxCord)) 
     //East facing nonPlayableSquare side and West facing playableSquare side checker
-    && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 100))){
+    && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
         return(true);
     }
 }
@@ -143,6 +150,8 @@ function outOfBounds(){
 //catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
 // .x, the period means current directory (folder it is in)
 
+var global = [];
+
 function readJSONData() {
     fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
         .then(response => 
@@ -154,14 +163,10 @@ function readJSONData() {
 }
 
 function initialDrawObstacles(data){
+    global = data;
     for (var i = 0; i < 5; i ++) {
-        obstacleSquare = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
-        ctx.fillStyle = "#" + data.color;
-        ctx.fillRect(700, 460, 100, 100);
-        console.log((squareTemp.width / 5));
-        console.log((squareTemp.height / 5));
+        window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
+        ctx.fillStyle = data[i].color;
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 100, 100);
     }
 }
-
-//200
-//140

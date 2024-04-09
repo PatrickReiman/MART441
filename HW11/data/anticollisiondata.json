@@ -1,31 +1,31 @@
 [
     {
         "xCord": 200,
-        "yCord": 140,
+        "yCord": 200,
         "scaling": 1,
         "color": "red"
     },
     {
         "xCord": 700,
-        "yCord": 140,
+        "yCord": 200,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 700,
+        "xCord": 600,
         "yCord": 460,
         "scaling": 1,
         "color": "red"
     },
     {
-        "xCord": 200,
+        "xCord": 300,
         "yCord": 460,
         "scaling": 1,
         "color": "red"
     },
     {
         "xCord": 450,
-        "yCord": 140,
+        "yCord": 100,
         "scaling": 1,
         "color": "red"
     }
