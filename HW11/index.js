@@ -171,7 +171,7 @@ function movement(event) {
         }, 500);
         score++;
         document.getElementById("h1").innerHTML = "Score: " + score;
-        if (score == 2){
+        if (score == 20){
             document.getElementById("music").pause();
             document.getElementById("music").currentTime = 0;
             document.getElementById("secretmusic").play();
