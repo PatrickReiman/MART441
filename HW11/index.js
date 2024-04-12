@@ -47,6 +47,13 @@ class superSquare {
 var global = [];
 
 function readJSONData() {
+    fetch('https://github.com/PatrickReiman/MART441/blob/main/HW11/data/nonPlayableSquaredata.json')
+    .then(response => 
+        response.json())
+    .then(
+        setupNPC())
+    .catch(error =>
+        console.log(error))
     fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
         .then(response => 
             response.json())
@@ -56,8 +63,15 @@ function readJSONData() {
             console.log(error))
 }
 
+function setupNPC(data){
+    for (var i =0; i < 3; i++) {
+        window['nonPlayableSquare'+i] = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
+        window['nonPlayableSquare'+i].changeColor(data[i].color);
+    }
+}
+
 function initialDrawObstacles(data) {
-    for (var i = 0; i < 5; i ++) {
+    for (var i = 0; i < 6; i ++) {
         window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = data[i].color;
         ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
@@ -94,7 +108,6 @@ function initialMakeSquare() {
     ctx.fillStyle = color;
     ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
 
-    nonPlayableSquare = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
     ctx.fillStyle = "green";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 25, 25);
 }
@@ -164,7 +177,7 @@ function squares() {
     ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.currentScaling), (50*playerSquare.currentScaling));
     ctx.fillStyle = "green";
     ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (25*nonPlayableSquare.currentScaling), (25*nonPlayableSquare.currentScaling));
-    for (var i = 0; i < 5; i ++) {
+    for (var i = 0; i < 6; i ++) {
         ctx.fillStyle = "red";
         ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
     }
@@ -201,7 +214,7 @@ function outOfBounds() {
 }
 
 function overlapNPC(nonPlayableSquare) {
-    for (var i = 0; i < 5; i ++){
+    for (var i = 0; i < 6; i ++){
         if ((((window['obstacleSquare'+i].currentyCord + 50) >= (nonPlayableSquare.currentyCord)) 
         && ((window['obstacleSquare'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
         && ((window['obstacleSquare'+i].currentxCord + 50) >= (nonPlayableSquare.currentxCord)) 
@@ -212,7 +225,7 @@ function overlapNPC(nonPlayableSquare) {
 }
 
 function touchCollision(playerSquare) {
-    for (var i = 0; i < 5; i ++){
+    for (var i = 0; i < 6; i ++){
         if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentyCord)) 
         && ((playerSquare.currentyCord) <= (window['obstacleSquare'+i].currentyCord + 50))) 
         && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (window['obstacleSquare'+i].currentxCord)) 
