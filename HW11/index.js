@@ -54,6 +54,7 @@ function readJSONData() {
             initialDrawObstacles(data))
         .catch(error =>
             console.log(error))
+    fetch('')
 }
 
 function initialDrawObstacles(data) {
@@ -114,7 +115,6 @@ function movement(event) {
     squares();   
 
     if (overlap(playerSquare, nonPlayableSquare)){
-        document.body.style.backgroundImage = "url('./img/mark.jpg')";
         randomColor();
         playerSquare.changeColor(color);
         playerSquare.changeScaling((Math.random() * (2 - 0.2) + 0.2).toFixed(1));
