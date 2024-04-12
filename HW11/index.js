@@ -54,7 +54,6 @@ function readJSONData() {
             initialDrawObstacles(data))
         .catch(error =>
             console.log(error))
-    fetch('')
 }
 
 function initialDrawObstacles(data) {
