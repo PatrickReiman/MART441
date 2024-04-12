@@ -44,52 +44,80 @@ class superSquare {
 //catch: only there to give an error when API cannot be accessed (might as well have it though functionally it is not important)
 // .x, the period means current directory (folder it is in)
 
-var global = [];
+whoOverlap = [];
+score = 0;
+whichCollected = [];
 
-function readJSONData() {
-    fetch('https://github.com/PatrickReiman/MART441/blob/main/HW11/data/nonPlayableSquaredata.json')
-    .then(response => 
-        response.json())
-    .then(
-        setupNPC())
-    .catch(error =>
-        console.log(error))
-    fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
+//Reads the JSON files
+async function readJSONData() {
+    await fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/nonPlayableSquaredata.json')
+        .then(response => 
+            response.json())
+        .then(
+            initialMakeSquare())
+        .catch(error =>
+            console.log(error));
+    await fetch('https://raw.githubusercontent.com/PatrickReiman/MART441/main/HW11/data/anticollisiondata.json')
         .then(response => 
             response.json())
         .then(data =>
             initialDrawObstacles(data))
         .catch(error =>
-            console.log(error))
+            console.log(error));
 }
 
-function setupNPC(data){
-    for (var i =0; i < 3; i++) {
+//goes second
+function initialMakeSquare() {
+    squareTemp = document.getElementById("squareTemp");
+    ctx = squareTemp.getContext("2d");
+
+    playerSquare = new superSquare((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 1, color);    
+    ctx.fillStyle = color;
+    ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
+
+    for (var i = 0; i < 3; i++){
         window['nonPlayableSquare'+i] = new superSquare(Math.floor(Math.random() * (squareTemp.width - 25)), Math.floor(Math.random() * (squareTemp.height - 25)), 1, "green");
-        window['nonPlayableSquare'+i].changeColor(data[i].color);
+        ctx.fillStyle = "green";
+        ctx.fillRect(window['nonPlayableSquare'+i].currentxCord, window['nonPlayableSquare'+i].currentyCord, 25, 25); 
     }
 }
 
+//goes second
 function initialDrawObstacles(data) {
     for (var i = 0; i < 6; i ++) {
         window['obstacleSquare'+i] = new superSquare(data[i].xCord, data[i].yCord, data[i].scaling, data[i].color);
         ctx.fillStyle = data[i].color;
         ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
     }
-    while (overlapNPC(nonPlayableSquare)){
-        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
-        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
-        squares();
-        console.log("overlap");
+    while (overlapNPC()){
+        for (var i = 1; i <= whoOverlap.length; i++){
+            window['nonPlayableSquare'+whoOverlap[i-1]].changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+            window['nonPlayableSquare'+whoOverlap[i-1]].changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+            squares();
+            console.log("overlap");
+        }
+        whoOverlap = [];
     }
 }
 
-function playMusic() {
-    document.getElementById("music").loop = true;
-    document.getElementById("music").play();
-    document.getElementById("music").volume = 0.5;
+//draw starts from top left corner, this is where the x, y is centered on
+function squares() {
+    ctx.clearRect(0, 0, 1000, 700)
+    ctx.fillStyle = color;
+    ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.currentScaling), (50*playerSquare.currentScaling));
+
+    for (var i = 0; i < 3; i++) {
+        ctx.fillStyle = "green";
+        ctx.fillRect(window['nonPlayableSquare'+i].currentxCord, window['nonPlayableSquare'+i].currentyCord, (25*window['nonPlayableSquare'+i].currentScaling), (25*window['nonPlayableSquare'+i].currentScaling));
+    }
+
+    for (var i = 0; i < 6; i++) {
+        ctx.fillStyle = "red";
+        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
+    }
 }
 
+//character color on start and upon collection
 function randomColor() {
     color = "";
     //had to fix the AI slop though with the while loop since it sometimes threw out values that didn't work in hexadecimal
@@ -100,45 +128,42 @@ function randomColor() {
     }
 }
 
-function initialMakeSquare() {
-    squareTemp = document.getElementById("squareTemp");
-    ctx = squareTemp.getContext("2d");
-
-    playerSquare = new superSquare((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 1, color);    
-    ctx.fillStyle = color;
-    ctx.fillRect((squareTemp.width / 2) - 25, (squareTemp.height / 2) - 25, 50, 50);
-
-    ctx.fillStyle = "green";
-    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, 25, 25);
-}
-
-score = 0;
-
+//what happens whenever you press a key
 function movement(event) {
     if (touchCollision(playerSquare)){
         resetOnDeath(playerSquare);
+        new Audio('./audio/gameover.mp3').play();
     } else {
         pressingKeys(playerSquare, event);
         if (touchCollision(playerSquare)){
             resetOnDeath(playerSquare);
+            new Audio('./audio/gameover.mp3').play();
         }
     }
 
     squares();   
 
-    if (overlap(playerSquare, nonPlayableSquare)){
+    if (overlap(playerSquare)){
+        new Audio('./audio/collect.mp3').play();
         randomColor();
         playerSquare.changeColor(color);
         playerSquare.changeScaling((Math.random() * (2 - 0.2) + 0.2).toFixed(1));
 
-        nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
-        nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
-        while (overlapNPC(nonPlayableSquare)){
-            nonPlayableSquare.changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
-            nonPlayableSquare.changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
-            squares();
-            console.log("overlap");
+        for (var i = 1; i <= whichCollected.length; i++){
+            window['nonPlayableSquare'+whichCollected[i-1]].changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+            window['nonPlayableSquare'+whichCollected[i-1]].changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+            while (overlapNPC()){
+                for (var i = 1; i <= whoOverlap.length; i++){
+                    window['nonPlayableSquare'+whoOverlap[i-1]].changexCord(Math.floor(Math.random() * (squareTemp.width - 25)));
+                    window['nonPlayableSquare'+whoOverlap[i-1]].changeyCord(Math.floor(Math.random() * (squareTemp.height - 25)));
+                    squares();
+                    console.log("overlap");
+                }
+                whoOverlap = [];
+            }
         }
+        whichCollected = [];
+
         squares();
         setTimeout(function() {
             document.body.style.backgroundImage = "";
@@ -150,6 +175,7 @@ function movement(event) {
     outOfBounds();
 }
 
+//resets you upon death
 function resetOnDeath(playerSquare) {
     score--;
     document.getElementById("h1").innerHTML = "Score: " + score;
@@ -158,6 +184,7 @@ function resetOnDeath(playerSquare) {
     squares();
 }
 
+//where key pressed get read and output determined, moved in the past because I was trying to figure out multi-directional movement
 function pressingKeys(playerSquare, event) {
     if (event.key == "w") {
         playerSquare.changeyCord(playerSquare.currentyCord - 20);
@@ -170,29 +197,22 @@ function pressingKeys(playerSquare, event) {
     }
 }
 
-//draw starts from top left corner, this is where the x, y is centered on
-function squares() {
-    ctx.clearRect(0, 0, 1000, 700)
-    ctx.fillStyle = color;
-    ctx.fillRect(playerSquare.currentxCord, playerSquare.currentyCord, (50*playerSquare.currentScaling), (50*playerSquare.currentScaling));
-    ctx.fillStyle = "green";
-    ctx.fillRect(nonPlayableSquare.currentxCord, nonPlayableSquare.currentyCord, (25*nonPlayableSquare.currentScaling), (25*nonPlayableSquare.currentScaling));
-    for (var i = 0; i < 6; i ++) {
-        ctx.fillStyle = "red";
-        ctx.fillRect(window['obstacleSquare'+i].currentxCord, window['obstacleSquare'+i].currentyCord, 50, 50);
-    }
-}
 
-function overlap(playerSquare, nonPlayableSquare) {
-    //North Facing nonPlayableSquare side and South facing playableSquare side checker
-    if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentyCord)) 
-    //South Facing nonPlayableSquare side and North facing playableSquare side checker
-    && ((playerSquare.currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
-    //West facing nonPlayableSquare side and East facing playableSquare side checker
-    && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (nonPlayableSquare.currentxCord)) 
-    //East facing nonPlayableSquare side and West facing playableSquare side checker
-    && ((playerSquare.currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
-        return(true);
+
+//ALL COLLISION DETECTION
+function overlap(playerSquare) {
+    for (i = 0; i < 3; i++){
+        //North Facing nonPlayableSquare side and South facing playableSquare side checker
+        if ((((playerSquare.currentyCord + (50*playerSquare.currentScaling)) >= (window['nonPlayableSquare'+i].currentyCord)) 
+        //South Facing nonPlayableSquare side and North facing playableSquare side checker
+        && ((playerSquare.currentyCord) <= (window['nonPlayableSquare'+i].currentyCord + 25))) 
+        //West facing nonPlayableSquare side and East facing playableSquare side checker
+        && ((playerSquare.currentxCord + (50*playerSquare.currentScaling)) >= (window['nonPlayableSquare'+i].currentxCord)) 
+        //East facing nonPlayableSquare side and West facing playableSquare side checker
+        && ((playerSquare.currentxCord) <= (window['nonPlayableSquare'+i].currentxCord + 25))){
+            whichCollected.push(i);
+            return(true);
+        }
     }
 }
 
@@ -213,14 +233,19 @@ function outOfBounds() {
     squares();
 }
 
-function overlapNPC(nonPlayableSquare) {
-    for (var i = 0; i < 6; i ++){
-        if ((((window['obstacleSquare'+i].currentyCord + 50) >= (nonPlayableSquare.currentyCord)) 
-        && ((window['obstacleSquare'+i].currentyCord) <= (nonPlayableSquare.currentyCord + 25))) 
-        && ((window['obstacleSquare'+i].currentxCord + 50) >= (nonPlayableSquare.currentxCord)) 
-        && ((window['obstacleSquare'+i].currentxCord) <= (nonPlayableSquare.currentxCord + 25))){
-            return(true);
+function overlapNPC() {
+    var temp = 0;
+    while (temp < 3) {
+        for (var i = 0; i < 6; i ++){
+            if ((((window['obstacleSquare'+i].currentyCord + 50) >= (window['nonPlayableSquare'+temp].currentyCord))
+            && ((window['obstacleSquare'+i].currentyCord) <= (window['nonPlayableSquare'+temp].currentyCord + 25))) 
+            && ((window['obstacleSquare'+i].currentxCord + 50) >= (window['nonPlayableSquare'+temp].currentxCord)) 
+            && ((window['obstacleSquare'+i].currentxCord) <= (window['nonPlayableSquare'+temp].currentxCord + 25))){
+                whoOverlap.push(temp);
+                return(true);
+            }
         }
+        temp++;
     }
 }
 
@@ -234,4 +259,14 @@ function touchCollision(playerSquare) {
     }
     }
 
+}
+//ALL COLLISION DETECTION
+
+
+
+//music down here because unimportant
+function playMusic() {
+    document.getElementById("music").loop = true;
+    document.getElementById("music").play();
+    document.getElementById("music").volume = 0.5;
 }
