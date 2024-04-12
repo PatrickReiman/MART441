@@ -1,32 +1,20 @@
 [
     {
-        "xCord": 200,
-        "yCord": 200,
+        "xCord": 0,
+        "yCord": 0,
         "scaling": 1,
-        "color": "red"
+        "color": ""
     },
     {
-        "xCord": 700,
-        "yCord": 200,
+        "xCord": 0,
+        "yCord": 0,
         "scaling": 1,
-        "color": "red"
+        "color": ""
     },
     {
-        "xCord": 600,
-        "yCord": 460,
+        "xCord": 0,
+        "yCord": 0,
         "scaling": 1,
-        "color": "red"
-    },
-    {
-        "xCord": 300,
-        "yCord": 460,
-        "scaling": 1,
-        "color": "red"
-    },
-    {
-        "xCord": 450,
-        "yCord": 70,
-        "scaling": 1,
-        "color": "red"
+        "color": ""
     }
 ]
