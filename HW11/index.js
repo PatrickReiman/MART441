@@ -171,6 +171,12 @@ function movement(event) {
         }, 500);
         score++;
         document.getElementById("h1").innerHTML = "Score: " + score;
+        if (score == 2){
+            document.getElementById("music").pause();
+            document.getElementById("music").currentTime = 0;
+            document.getElementById("secretmusic").play();
+            document.getElementById("secretmusic").volume = 0.3;
+        }
     }
     outOfBounds();
 }
@@ -266,7 +272,9 @@ function touchCollision(playerSquare) {
 
 //music down here because unimportant
 function playMusic() {
+    document.getElementById("secretmusic").pause();
+    document.getElementById("secretmusic").currentTime = 0;
     document.getElementById("music").loop = true;
     document.getElementById("music").play();
-    document.getElementById("music").volume = 0.5;
+    document.getElementById("music").volume = 0.3;
 }
