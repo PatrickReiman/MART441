@@ -1,0 +1,86 @@
+/* Rendering for Babylon.js */
+html, body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+
+#renderCanvas {
+    margin-top: 1em;
+    margin-left: 1em;
+    width: 1000px;
+    height: 700px;
+    border: 10px groove #ffffff;
+    touch-action: none;
+}
+
+#canvasZone {
+    width: 50%;
+    height: 50%;
+}
+
+
+
+/* Buttons */
+.button {
+    position: relative;
+    top: 50%; 
+    left: 20%;
+    color: #ffffff;
+    background-color: #0661d9;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.button:hover {
+    background-color:#094ba1;
+    color: #ffffff;
+    transition:0.5s;
+}
+
+.button:active {
+    color: #ffffff;
+    background-color: #3781e0;
+}
+
+
+
+/* Headers and formatting */
+h1 {
+    color: white;
+    text-align: center;
+    top: 25%;
+    left: 65%;
+    position: absolute;
+    word-wrap: normal;
+    font-weight: bolder;
+}
+
+#alth1 {
+    font-size: 20pt;
+    font-weight: bolder;
+    color: white;
+}
+
+.split {
+    height: 100%;
+    width: 50%;
+    z-index: 1;
+    top: 0;
+}
+
+.left {
+    left: 0;
+}
+
+.right {
+    right: 0;
+}

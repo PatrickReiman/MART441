@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv = "Content-Type" content = "text/html; charset=utf-8" />
+        <title>💀Bad To The Bone💀</title>
+        <link rel = "stylesheet" href = "./css/bootstrap.css">
+        <link rel = "stylesheet" href = "./css/style.css">
 
-        <title>Babylon.js sample code</title>
-
-        <!-- Babylon.js -->
+        <!-- Babylon.js (just a bunch of imports) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
         <script src="https://assets.babylonjs.com/generated/Assets.js"></script>
         <script src="https://cdn.babylonjs.com/recast.js"></script>
@@ -22,30 +23,25 @@
         <script src="https://cdn.babylonjs.com/serializers/babylonjs.serializers.min.js"></script>
         <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
         <script src="https://cdn.babylonjs.com/inspector/babylon.inspector.bundle.js"></script>
-
-        <style>
-            html, body {
-                overflow: hidden;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-
-            #renderCanvas {
-                width: 100%;
-                height: 100%;
-                touch-action: none;
-            }
-            
-            #canvasZone {
-                width: 100%;
-                height: 100%;
-            }
-        </style>
     </head>
+
 <body>
-    <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
+
+    <!-- Navigation Bar (to move to different pages) -->
+    <nav class = "navbar navbar-expand-lg navbar-dark" style = "background-color: #5c5c5c;">
+        <div class = "collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class = "navbar-nav">
+              <a class = "nav-item nav-link active ms-3" style = "font-size: 15pt;" href = "./index.html">💀</a>
+              <a class = "nav-item nav-link ms-2" style = "font-size: 15pt;" href = "./pages/papers.html">Papers</a>
+              <a class = "nav-item nav-link ms-2" style = "font-size: 15pt;" href = "./pages/video.html">Video</a>
+            </div>
+          </div>
+      </nav>
+
+    <div class = "split left" id = "canvasZone"><canvas id="renderCanvas"></canvas></div>
+    <div class = "split right" id = "textDiv"><h1>Click the skull! <span style = "color: #f86363;">(Audio ON)</span></h1></div>
+
+    <!-- Babylon.js scripts because the only way to import Babylon.js into a .js file is through npm and I have no idea how to do that -->
     <script>
         var canvas = document.getElementById("renderCanvas");
 
@@ -110,7 +106,7 @@
     // Buffer Audio (apparently you need to buffer audio before playing it, not sure why tbh)
     var music;
 	loadArrayBufferFromURL("./audio/skull.mp3");
-	
+
 	function loadArrayBufferFromURL(urlToSound) {
 	    var request = new XMLHttpRequest();
 	    request.open('GET', urlToSound, true);
@@ -118,20 +114,21 @@
 	    request.onreadystatechange = function() {
 	        if (request.readyState == 4) {
 	            if (request.status == 200) {
-	                music = new BABYLON.Sound("FromArrayBuffer", request.response, scene, soundReadyToBePlayed);
+	                music = new BABYLON.Sound("FromArrayBuffer", request.response, scene, playSound);
 	            } 
 	        }
 	    };
 		request.send(null);
 	}
 	
-	function soundReadyToBePlayed() {
+	function playSound() {
 		music.play();	
 	}
 
-    // Audio unlock
-    BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
 
+
+    // Audio unlock (need this to unlock the audio once you interact with the screen)
+    BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
 
 
 
@@ -151,10 +148,14 @@
         // Action done when object is clicked (you'll have to deal with low FPS when clicking I have no idea how to implement GPU picking)
         newMeshes[0].actionManager = new BABYLON.ActionManager(scene);
         newMeshes[0].actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function() {
+            // Unlocks audio so it can be played without you having to press a button
             if (!BABYLON.Engine.audioEngine.unlocked) {
                 BABYLON.Engine.audioEngine.unlock();
             }
-            soundReadyToBePlayed();
+            var skullColor = new BABYLON.StandardMaterial("skullColor", scene);    
+            skullColor.diffuseColor = new BABYLON.Color3(Math.random(), Math.random(), Math.random());
+            newMeshes[0].material = skullColor;
+            playSound();
         }));
     });
 
