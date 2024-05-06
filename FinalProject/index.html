@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-        <title>Bad to the bone</title>
+        <title>Babylon.js sample code</title>
 
         <!-- Babylon.js -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.6.2/dat.gui.min.js"></script>
@@ -33,9 +33,8 @@
             }
 
             #renderCanvas {
-                width: 1000px;
-                height: 700px;
-                border: 10px groove #7a7878;
+                width: 100%;
+                height: 100%;
                 touch-action: none;
             }
             
@@ -43,37 +42,10 @@
                 width: 100%;
                 height: 100%;
             }
-
-            .button {
-                position: absolute;
-                left: 45%;
-                top: 2%;
-                color: #ffffff;
-                background-color: #0661d9;
-                padding: 15px 32px;
-                text-align: center;
-                display: inline-block;
-                cursor: pointer;
-                border-radius: 5px;
-                font-size: 27px;
-                font-weight: bold;
-            }
-
-            .button:hover {
-                background-color:#094ba1;
-                color: #ffffff;
-                transition:0.5s;
-            }
-
-            .button:active {
-                color: #ffffff;
-                background-color: #3781e0;
-            }
         </style>
     </head>
 <body>
     <div id="canvasZone"><canvas id="renderCanvas"></canvas></div>
-    <button id = "button" class = "button" onclick = "location.href='./index.html'">Shapes</button>
     <script>
         var canvas = document.getElementById("renderCanvas");
 
@@ -89,7 +61,7 @@
         var scene = null;
         var sceneToRender = null;
         var createDefaultEngine = function() { return new BABYLON.Engine(canvas, true, { preserveDrawingBuffer: true, stencil: true,  disableWebGL2Support: false}); };
-    // No idea why this has to have a function here, website refuses to explain
+        // No idea why this has to have a function here, website refuses to explain
     var createScene = function () {
     // Makes scene
     var scene = new BABYLON.Scene(engine);
@@ -129,9 +101,37 @@
 
 
     // The ground template
-    const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap("gdhm", "https://cdn.limetric.nl/openrct2-forums-media/monthly_2017_06/scene2.png.72fadcf00adf7c876f53f2fc0b4a85e6.png", {width: 32, height: 32, maxHeight: 5, subdivisions: 1000}, scene);
+    const ground = BABYLON.MeshBuilder.CreateGroundFromHeightMap("gdhm", "./img/heightmap.png", {width: 60, height: 60, maxHeight: 8, subdivisions: 1000}, scene);
     ground.material = groundMaterial;
     ground.position.y = -10;
+
+
+
+    // Buffer Audio (apparently you need to buffer audio before playing it, not sure why tbh)
+    var music;
+	loadArrayBufferFromURL("./audio/skull.mp3");
+	
+	function loadArrayBufferFromURL(urlToSound) {
+	    var request = new XMLHttpRequest();
+	    request.open('GET', urlToSound, true);
+	    request.responseType = "arraybuffer";
+	    request.onreadystatechange = function() {
+	        if (request.readyState == 4) {
+	            if (request.status == 200) {
+	                music = new BABYLON.Sound("FromArrayBuffer", request.response, scene, soundReadyToBePlayed);
+	            } 
+	        }
+	    };
+		request.send(null);
+	}
+	
+	function soundReadyToBePlayed() {
+		music.play();	
+	}
+
+    // Audio unlock
+    BABYLON.Engine.audioEngine.useCustomUnlockedButton = true;
+
 
 
 
@@ -145,9 +145,18 @@
         
         // Rotation
         scene.registerBeforeRender(function () {
-            newMeshes[0].rotate(BABYLON.Vector3.Up(), -Math.PI / 70);    
+            newMeshes[0].rotate(BABYLON.Vector3.Up(), -Math.PI / 70);
         });
-    });    
+
+        // Action done when object is clicked (you'll have to deal with low FPS when clicking I have no idea how to implement GPU picking)
+        newMeshes[0].actionManager = new BABYLON.ActionManager(scene);
+        newMeshes[0].actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function() {
+            if (!BABYLON.Engine.audioEngine.unlocked) {
+                BABYLON.Engine.audioEngine.unlock();
+            }
+            soundReadyToBePlayed();
+        }));
+    });
 
 
 
