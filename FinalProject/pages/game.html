@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<head>
+    <script type = "text/javascript" src = "../javascript/index.js"></script>
+    <link rel = "stylesheet" href = "../css/bootstrap.css">
+    <link rel = "stylesheet" href = "../css/style.css">
+    <title>improved game</title>
+</head>
+
+<body onKeyDown = "movement(event)";>
+    <nav class = "navbar navbar-expand-lg navbar-dark" style = "background-color: #5c5c5c;">
+        <div class = "collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class = "navbar-nav">
+                <a class = "nav-item nav-link ms-3" style = "font-size: 15pt;" href = "../index.html">💀</a>
+                <a class = "nav-item nav-link ms-2" style = "font-size: 15pt;" href = "./papers.html">Papers</a>
+                <a class = "nav-item nav-link active ms-2" style = "font-size: 15pt;" href = "./game.html">Little Box Man</a>
+            </div>
+        </div>
+    </nav>
+    <h2 id = "game">Use <span style = "color:#b84c4c;">WASD</span> to move around! Press <span style = "color:#b84c4c;">C</span> to toggle random colors, use <span style = "color:#b84c4c;">T</span> to teleport randomly, and use the <span style = "color:#b84c4c;">Up/Down arrow keys</span> to change your scaling!</h1>
+    <canvas id = "squareTemp" width = "1000" height = "700" style = "border: 10px groove #ffffff;"></canvas>
+    <script>
+        randomColor();
+        initialMakeSquare();
+    </script>
+</body>
